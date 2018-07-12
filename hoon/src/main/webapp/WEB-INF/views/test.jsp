@@ -13,7 +13,7 @@
 <body>
 <button id="button">dddd</button>
 <ul id="aaa">
-	
+	ssssss
 </ul>
 
 <script id="template" type="text/x-handlebars-template">
