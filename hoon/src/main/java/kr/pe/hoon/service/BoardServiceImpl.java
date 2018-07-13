@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.pe.hoon.domain.BoardVO;
-import kr.pe.hoon.domain.Criteria;
 import kr.pe.hoon.domain.SearchCriteria;
 import kr.pe.hoon.persistence.BoardDAO;
 
@@ -17,8 +16,19 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO bDAO;
 	
 	@Override
+	@Transactional
 	public void create(BoardVO bVO) throws Exception {
 		bDAO.create(bVO);
+		
+		String[] files = bVO.getFiles();
+		
+		if (files == null) {
+			return;
+		}
+		
+		for (String fileName : files) {
+			bDAO.createAttact(fileName);
+		}
 	}
 	
 	@Override

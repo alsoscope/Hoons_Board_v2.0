@@ -22,6 +22,11 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
+	public void createAttact(String fullName) throws Exception {
+		sqlSession.insert("board.createAttacth", fullName);
+	}
+	
+	@Override
 	public BoardVO read(int bno) throws Exception {
 		return sqlSession.selectOne("board.read", bno);
 	}

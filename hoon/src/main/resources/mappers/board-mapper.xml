@@ -9,6 +9,11 @@
 		values (#{title}, #{content}, #{writer})
 	</insert>
 	
+	<insert id="createAttach">
+		insert into tbl_attach (fullname, bno)
+		values (#{fullname}, LAST_INSERT_ID())
+	</insert>
+	
 	<select id="read" resultType="BoardVO">
 		select *
 		from tbl_board

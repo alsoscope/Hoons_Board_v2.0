@@ -1,5 +1,6 @@
 package kr.pe.hoon.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class BoardVO {
@@ -11,6 +12,8 @@ public class BoardVO {
 	private int viewcnt;
 	private int replycnt;
 	private int likecnt;
+	
+	private String[] files;
 	
 	public int getBno() {
 		return bno;
@@ -61,10 +64,17 @@ public class BoardVO {
 		this.likecnt = likecnt;
 	}
 	
+	public String[] getFiles() {
+		return files;
+	}
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
+	
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", regdate="
-				+ regdate + ", viewcnt=" + viewcnt + ", replycnt=" + replycnt + ", likecnt=" + likecnt + "]";
+				+ regdate + ", viewcnt=" + viewcnt + ", replycnt=" + replycnt + ", likecnt=" + likecnt + ", files="
+				+ Arrays.toString(files) + "]";
 	}
-	
 }

@@ -8,6 +8,8 @@ import kr.pe.hoon.domain.SearchCriteria;
 public interface BoardDAO {
 	public void create(BoardVO bVO) throws Exception;
 	
+	public void createAttact(String fullName) throws Exception;
+	
 	public BoardVO read(int bno) throws Exception;
 	
 	public void update(BoardVO bVO) throws Exception;

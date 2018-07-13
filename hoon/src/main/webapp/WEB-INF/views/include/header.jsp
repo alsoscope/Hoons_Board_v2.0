@@ -11,6 +11,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+
+<style>
+	.fileDrop {
+		width: 100%;
+		height: 200px;
+		border: 1px dotted blue;
+		background: white;
+		margin: auto;
+	}
+</style>
+</head>
 
 <body>
 

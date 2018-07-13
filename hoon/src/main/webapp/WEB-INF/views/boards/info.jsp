@@ -73,9 +73,9 @@
 				</ul>
 			</div>
 		</div>
+		
+		<hr style="border-width: 1px; border-color: gray">	
 	</div>
-	
-	<hr style="border-width: 2px; border-color: gray">
 	
 	<!-- 댓글 쓰기 -->
 	<div class="container">
