@@ -74,6 +74,14 @@
 			</div>
 		</div>
 		
+		<ul class="mailbox-attachments clearfix uploadedList">
+		</ul>
+		
+		<div class="popup back" style="display: none;">
+			<div id="popup_front" class="popup front" style="display: none;"></div>
+			<img id="popup_img">
+		</div>
+		
 		<hr style="border-width: 1px; border-color: gray">	
 	</div>
 	
@@ -136,6 +144,17 @@
 		</div>
 	</div>
 	
+	<script id="attach-template" type="text/x-handlebars-template">
+		<li data-src="{{fullName}}">
+			<span class="mailbox-attachment-icon has-img">
+				<img src="{{imgSrc}}" alt="Attachment">
+			</span>
+			<div class="mailbox-attachment-info">
+				<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+			</div>
+		</li>
+	</script>
+	
 	<script id="reply-template" type="text/x-handlebars-template">
 		{{#each .}}
 		<li class="list-group-item" data-rno={{rno}}>
@@ -154,8 +173,47 @@
 	</script>
 	
 	<script>
-		$(document).ready(getReplyList(1));
+		$(document).ready(function() {
+			getReplyList(1);
+			getAttachList();
+		});
 	
+		function getAttachList() {
+			var bno = "${bVO.bno}";
+			var source = $("#attach-template").html();
+			var template = Handlebars.compile(source);
+			
+			$.ajax({
+				type:"GET",
+				url:"/boards/" + bno + "/attaches",
+				dataType:"text",
+				success:function(result) {
+					$(result).each(function() {
+						var fileInfo = getFileInfo(this);
+						var html = template(fileInfo);
+						
+						$(".uploadedList").append(html);
+					});
+				}
+			});
+		}
+		
+		$(".iploadedList").on("click", ".mailbox-attachment-info a", function(event) {
+			var fileLink = $(this).attr("href");
+			
+			if (checkImageType(fileLink)) {
+				event.preventDefault();
+				
+				var imgTag = $("#pop_img");
+				imgTag.attr("src", fileLink);
+				console.log(imgTag.attr("src"));
+				
+				$("#popup_img").click(function() {
+					$(".popup").hide("slow");
+				});
+			}
+		});
+		
 		$("#submit-btn").click(function() {
 			var bno = "${bVO.bno}";
 			var replytext = $("#replytext").val();
@@ -176,7 +234,7 @@
 				success:function() {
 					alert("등록되었습니다.");
 					$("#replytext").val("");
-					getReplyList(1);
+					getReplyList(1); 
 				}
 			});
 		});

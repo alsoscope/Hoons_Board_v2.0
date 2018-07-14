@@ -1,6 +1,7 @@
 package kr.pe.hoon.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -69,9 +70,15 @@ public class BoardController {
 		return "boards/info";
 	}
 	
+	@RequestMapping("{bno}/attaches")
+	@ResponseBody
+	public List<String> readAllAttaches(@PathVariable int bno) throws Exception {
+		return boardService.readAllAttaches(bno);
+	}
+	
 	@RequestMapping(value="{bno}/replies", method=RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> readAllReply(@PathVariable int bno, int page) {
+	public ResponseEntity<Map<String, Object>> readAllReplies(@PathVariable int bno, int page) {
 		ResponseEntity<Map<String, Object>> entity = null;
 		Map<String, Object> map = new HashMap<>();
 		

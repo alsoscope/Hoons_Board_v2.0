@@ -28,8 +28,8 @@ import kr.pe.hoon.util.UploadFileUtils;
 public class UploadController {
 	private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 	
-	@Resource(name="uploadPath")
-	private String uploadPath;
+	// bean 등록이 안됨..... 수정 요망!!
+	private static final String uploadPath = "c:\\file\\upload";
 	
 	@ResponseBody
 	@RequestMapping(value="uploadAjax", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
@@ -68,7 +68,6 @@ public class UploadController {
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
 		} finally {
 			in.close();
-			
 		}
 		
 		return entity;

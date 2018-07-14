@@ -12,6 +12,8 @@ public interface BoardDAO {
 	
 	public BoardVO read(int bno) throws Exception;
 	
+	public List<String> readAllAttaches(int bno) throws Exception;
+	
 	public void update(BoardVO bVO) throws Exception;
 	
 	public void updateViewcnt(int bno, int cnt) throws Exception;

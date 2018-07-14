@@ -32,6 +32,11 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
+	public List<String> readAllAttaches(int bno) throws Exception {
+		return sqlSession.selectList("board.readAllAttaches", bno);
+	}
+
+	@Override
 	public void update(BoardVO bVO) throws Exception {
 		sqlSession.update("board.update", bVO);
 	}

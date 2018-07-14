@@ -9,7 +9,7 @@ function getFileInfo(fullName) {
 	var fileLink;
 	
 	if (checkImageType(fullName)) {
-		imgSrc = "/diplayFile?fileName=" + fullName;
+		imgSrc = "/displayFile?fileName=" + fullName;
 		fileLink = fullName.substr(14);
 		
 		var front = fullName.substr(0, 12);

@@ -44,6 +44,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public List<String> readAllAttaches(int bno) throws Exception {
+		return bDAO.readAllAttaches(bno);
+	}
+	
+	@Override
 	public void update(BoardVO bVO) throws Exception {
 		bDAO.update(bVO);
 	}

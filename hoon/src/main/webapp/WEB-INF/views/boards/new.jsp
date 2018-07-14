@@ -49,7 +49,7 @@
 	<script id="uploadedList-template" type="text/x-handlebars-template">
 		<li>
 			<span class="mailbox-attachment-icon has-img">
-				<img src="{{imgsrc}}" art="Attachment">
+				<img src="{{imgSrc}}" alt="Attachment">
 			</span>
 			<div class="mailbox-attachment-info">
 				<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
@@ -68,18 +68,19 @@
 			event.preventDefault();
 		});
 		
-		$(".fileDrop").on("click", function(event) {
+		$(".fileDrop").on("drop", function(event) {
 			event.preventDefault();
 			
 			var files = event.originalEvent.dataTransfer.files;
 			var file = files[0];
 			
-			var formData = new FormDate();
+			var formData = new FormData();
 			formData.append("file", file);
 			
 			$.ajax({
 				type:"POST",
 				url:"/uploadAjax",
+				data:formData,
 				processData:false,
 				contentType:false,
 				dataType:"text",

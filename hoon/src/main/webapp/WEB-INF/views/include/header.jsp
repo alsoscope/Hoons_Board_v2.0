@@ -21,6 +21,29 @@
 		background: white;
 		margin: auto;
 	}
+	.popup {
+		position: absolute;
+	}
+	.back {
+		background-color: gray;
+		opacity: 0.5;
+		widows: 100%;
+		height: 300%;
+		overflow: hidden;
+		z-index: 1101;
+	}
+	.front {
+		z-index: 1110;
+		opacity: 1;
+		border: 1px;
+		margin: auto;
+	}
+	.show {
+		position: relative;
+		max-width: 1200px;
+		max-height: 800px;
+		overflow: auto;
+	}
 </style>
 </head>
 

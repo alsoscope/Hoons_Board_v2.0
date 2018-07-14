@@ -20,6 +20,21 @@
 		where bno = #{bno}
 	</select>
 	
+	<select id="readAll" resultType="BoardVO">
+		select *
+		from tbl_board
+		<include refid="query"></include>
+		<include refid="sort"></include>
+		limit #{startPage}, #{perPageNum}
+	</select>
+	
+	<select id="readAllAttaches" resultType="String">
+		select fullname
+		from tbl_attach
+		where bno = #{bno}
+		order by regdate
+	</select>
+	
 	<update id="update">
 		update tbl_board
 		set title = #{title}, content = #{content}
@@ -42,14 +57,6 @@
 		delete from tbl_board
 		where bno = #{bno}
 	</delete>
-	
-	<select id="readAll" resultType="BoardVO">
-		select *
-		from tbl_board
-		<include refid="query"></include>
-		<include refid="sort"></include>
-		limit #{startPage}, #{perPageNum}
-	</select>
 	
 	<select id="countAll" resultType="int">
 		select count(bno)

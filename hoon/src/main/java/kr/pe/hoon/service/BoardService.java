@@ -12,6 +12,8 @@ public interface BoardService {
 	
 	public BoardVO readNoViewcnt(int bno) throws Exception;
 
+	public List<String> readAllAttaches(int bno) throws Exception;
+	
 	public void update(BoardVO bVO) throws Exception;
 	
 	public void delete(int bno) throws Exception;
