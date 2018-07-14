@@ -28,7 +28,7 @@
 		limit #{startPage}, #{perPageNum}
 	</select>
 	
-	<select id="readAllAttaches" resultType="String">
+	<select id="readAllAttaches" resultType="string">
 		select fullname
 		from tbl_attach
 		where bno = #{bno}

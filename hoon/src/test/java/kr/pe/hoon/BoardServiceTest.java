@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.pe.hoon.domain.BoardVO;
 import kr.pe.hoon.persistence.BoardDAO;
+import kr.pe.hoon.service.BoardService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= {"classpath*:spring/root-context.xml"})
@@ -21,12 +22,15 @@ public class BoardServiceTest {
 	@Autowired
 	private BoardDAO bDAO;
 	
+	@Autowired
+	private BoardService boardService;
+	
 	@Test @Ignore
 	public void testSqlSession() throws Exception {
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 	}
 	
-	@Test 
+	@Test @Ignore
 	public void testBoardCreate() throws Exception {
 		BoardVO bVO = new BoardVO();
 		bVO.setTitle("테스트");
@@ -50,8 +54,9 @@ public class BoardServiceTest {
 		bDAO.update(bVO);
 	}
 	
-	@Test
+	@Test @Ignore
 	public void testBoardDelete() throws Exception {
 		bDAO.delete(56);
 	}
+
 }

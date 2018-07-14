@@ -144,7 +144,7 @@
 		</div>
 	</div>
 	
-	<script id="attach-template" type="text/x-handlebars-template">
+	<script id="attached-template" type="text/x-handlebars-template">
 		<li data-src="{{fullName}}">
 			<span class="mailbox-attachment-icon has-img">
 				<img src="{{imgSrc}}" alt="Attachment">
@@ -180,13 +180,13 @@
 	
 		function getAttachList() {
 			var bno = "${bVO.bno}";
-			var source = $("#attach-template").html();
+			var source = $("#attached-template").html();
 			var template = Handlebars.compile(source);
 			
 			$.ajax({
 				type:"GET",
 				url:"/boards/" + bno + "/attaches",
-				dataType:"text",
+				dataType:"json",
 				success:function(result) {
 					$(result).each(function() {
 						var fileInfo = getFileInfo(this);

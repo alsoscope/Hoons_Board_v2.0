@@ -5,6 +5,7 @@
 	<div class="container">
 		<div class="panel-body">
 			<h2>새 글 쓰기</h2>
+			<div class="form-group">
 			<form action="/boards/new" method="post" id="create-form" class="create-form">
 				<fieldset class="form">
 					<div class="form-group  has-feedback">
@@ -14,13 +15,6 @@
 						<div class="form-group">
 							<textarea class="form-control" name="content" style="height: 200px; resize: none" placeholder="내용을 입력해 주세요."></textarea>
 						</div>
-					</div>
-	
-					<div class="nav" role="navigation">
-						<fieldset class="buttons">
-							<a href="/boards" class="btn btn-default btn-wide" onclick="return confirm('정말로 취소하시겠습니까?')">취소</a> 
-							<input type="submit" class="create btn btn-success btn-wide pull-right" value="등록">
-						</fieldset>
 					</div>
 				</fieldset>
 				
@@ -32,21 +26,26 @@
 					</div>
 				</div>
 				
-				<div class="box-footer">
+				<div class="box-footer" style="background: #f8f8f8">
 					<div>
 						<hr color="gray">
 					</div>
 					
 					<ul class="mailbox-attachments clearfix uploadedList">
 					</ul>
-					
-					<button type="submit" class="btn btn-primary">저장</button>
+				</div>
+				
+				<div class="nav" role="navigation">
+					<fieldset class="buttons">
+						<a href="/boards" class="btn btn-default btn-wide" onclick="return confirm('정말로 취소하시겠습니까?')">취소</a> 
+						<input type="submit" class="create btn btn-success btn-wide pull-right" value="저장">
+					</fieldset>
 				</div>
 			</form>
 		</div>
 	</div>
 	
-	<script id="uploadedList-template" type="text/x-handlebars-template">
+	<script id="attach-template" type="text/x-handlebars-template">
 		<li>
 			<span class="mailbox-attachment-icon has-img">
 				<img src="{{imgSrc}}" alt="Attachment">
@@ -61,7 +60,7 @@
 	</script>
 	
 	<script>
-		var source = $("#uploadedList-template").html();
+		var source = $("#attach-template").html();
 		var template = Handlebars.compile(source);
 		
 		$(".fileDrop").on("dragenter dragover", function(event) {
@@ -79,7 +78,7 @@
 			
 			$.ajax({
 				type:"POST",
-				url:"/uploadAjax",
+				url:"/boards/uploadAjax",
 				data:formData,
 				processData:false,
 				contentType:false,
@@ -99,7 +98,7 @@
 			var str = "";
 			
 			$(".uploadedList .del-btn").each(function (index) {
-				str += "<input type='hidden' name='files['" + index + "]' value='" + $(this).attr("href") + "' >";
+				str += "<input type='hidden' name='files[" + index + "]' value='" + $(this).attr("href") + "' >";
 			});
 			
 			$(this).append(str);

@@ -9,17 +9,17 @@ function getFileInfo(fullName) {
 	var fileLink;
 	
 	if (checkImageType(fullName)) {
-		imgSrc = "/displayFile?fileName=" + fullName;
+		imgSrc = "/boards/displayFile?fileName=" + fullName;
 		fileLink = fullName.substr(14);
 		
 		var front = fullName.substr(0, 12);
 		var end = fullName.substr(14);
 		
-		getLink = "/displyFile?fileName=" + front + end;
+		getLink = "/boards/displayFile?fileName=" + front + end;
 	} else {
 		imgSrc = "/resources/dist/img/file.png";
 		fileLink = fullName.substr(12);
-		getLink = "displayFile?fullName=" + fullName;
+		getLink = "/boards/displayFile?fileName=" + fullName;
 	}
 	
 	fileName = fileLink.substr(fileLink.indexOf("_") + 1);

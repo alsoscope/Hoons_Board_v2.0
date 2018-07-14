@@ -69,11 +69,11 @@
 							<i class="fa fa-eye"></i> ${bVO.viewcnt }
 						</td>
 						<td rowspan="2">IMG</td>
-						<td>${bVO.writer }</td>
+						<td width="200px">${bVO.writer }</td>
 					</tr>
 					<tr>
 						<fmt:formatDate var="regdate" value="${bVO.regdate }" pattern="yyyy-MM-dd hh:mm:ss"/>
-						<td>${regdate }</td>
+						<td width="200px">${regdate }</td>
 					</tr>
 					</c:forEach>
 				</table>
