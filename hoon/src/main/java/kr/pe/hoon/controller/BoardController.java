@@ -154,8 +154,8 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="uploadAjax", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
-	public ResponseEntity<String> uploadAjaxPOST(MultipartFile file) throws Exception {
+	@RequestMapping(value="uploadFile", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
+	public ResponseEntity<String> uploadFile(MultipartFile file) throws Exception {
 		logger.info("originalName: " + file.getOriginalFilename());
 		
 		return new ResponseEntity<>(UploadFileUtils.uploadFiles(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);

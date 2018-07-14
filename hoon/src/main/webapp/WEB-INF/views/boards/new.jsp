@@ -78,7 +78,7 @@
 			
 			$.ajax({
 				type:"POST",
-				url:"/boards/uploadAjax",
+				url:"/boards/uploadFile",
 				data:formData,
 				processData:false,
 				contentType:false,
