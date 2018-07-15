@@ -16,14 +16,10 @@ public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	// Board 관련
 	@Override
 	public void create(BoardVO bVO) throws Exception {
 		sqlSession.insert("board.create", bVO);
-	}
-
-	@Override
-	public void createAttach(String fullName) throws Exception {
-		sqlSession.insert("board.createAttach", fullName);
 	}
 	
 	@Override
@@ -72,6 +68,40 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int readCount(SearchCriteria cri) throws Exception {
 		return sqlSession.selectOne("board.countAll", cri);
+	}
+
+	// Attach 관련
+	@Override
+	public void createAttach(String fullName) throws Exception {
+		sqlSession.insert("board.createAttach", fullName);
+	}
+	
+	@Override
+	public int readCountAttaches(int bno) throws Exception {
+		return sqlSession.selectOne("board.countAllAttaches", bno);
+	}
+	
+	@Override
+	public void updateAttach(String fullName, int bno) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("fullName", fullName);
+		map.put("bno", bno);
+		
+		sqlSession.update("board.updateAttach", map);
+	}
+	
+	@Override
+	public void deleteAttach(String fullName, int bno) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("fullName", fullName);
+		map.put("bno", bno);
+		
+		sqlSession.delete("board.deleteAttach", map);
+	}
+
+	@Override
+	public void deleteAllAttaches(int bno) throws Exception {
+		sqlSession.delete("board.deleteAllAttaches", bno);
 	}
 
 }

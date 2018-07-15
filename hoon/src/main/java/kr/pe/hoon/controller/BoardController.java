@@ -81,13 +81,6 @@ public class BoardController {
 		return "boards/info";
 	}
 	
-	@RequestMapping("{bno}/attaches")
-	@ResponseBody
-	public List<String> readAllAttaches(@PathVariable int bno) throws Exception {
-		logger.info(boardService.readAllAttaches(bno).toString());
-		return boardService.readAllAttaches(bno);
-	}
-	
 	@RequestMapping(value="{bno}/replies", method=RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> readAllReplies(@PathVariable int bno, int page) {
@@ -151,6 +144,14 @@ public class BoardController {
 		}
 		
 		return entity;
+	}
+	
+	@ResponseBody
+	@RequestMapping("{bno}/attaches")
+	public List<String> readAllAttaches(@PathVariable int bno) throws Exception {
+		logger.info(boardService.readAllAttaches(bno).toString());
+		
+		return boardService.readAllAttaches(bno);
 	}
 	
 	@ResponseBody

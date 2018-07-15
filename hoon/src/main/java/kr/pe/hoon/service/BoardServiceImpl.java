@@ -25,9 +25,10 @@ public class BoardServiceImpl implements BoardService {
 		if (files == null) {
 			return;
 		}
-		
-		for (String fileName : files) {
-			bDAO.createAttach(fileName);
+		else {
+			for (String fileName : files) {
+				bDAO.createAttach(fileName);
+			}
 		}
 	}
 	
@@ -49,12 +50,39 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	@Transactional
 	public void update(BoardVO bVO) throws Exception {
 		bDAO.update(bVO);
+		
+		int bno = bVO.getBno();
+		int savedFiles = bDAO.readCountAttaches(bno);
+		String[] files = bVO.getFiles();
+		
+		if (savedFiles <= 0) {
+			if (files == null) {
+				return;
+			} else {
+				for (String fileName : files) {
+					bDAO.updateAttach(fileName, bno);
+				}
+			}
+		} else {
+			bDAO.deleteAllAttaches(bno);
+			
+			if (files == null) {
+				return;
+			} else {
+				for (String fileName : files) {
+					bDAO.updateAttach(fileName, bno);
+				}
+			}
+		}
 	}
 
 	@Override
+	@Transactional
 	public void delete(int bno) throws Exception {
+		bDAO.deleteAllAttaches(bno);
 		bDAO.delete(bno);
 	}
 

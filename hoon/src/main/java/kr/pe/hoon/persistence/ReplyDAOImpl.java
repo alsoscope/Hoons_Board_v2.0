@@ -39,9 +39,10 @@ public class ReplyDAOImpl implements ReplyDAO {
 	public void delete(int rno) throws Exception {
 		sqlSession.delete("reply.delete", rno);
 	}
-
+	
 	@Override
 	public int readCount(int bno) throws Exception {
 		return sqlSession.selectOne("reply.readCount", bno);
 	}
+
 }

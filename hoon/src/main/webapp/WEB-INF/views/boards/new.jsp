@@ -94,6 +94,7 @@
 		
 		$("#create-form").submit(function(event) {
 			event.preventDefault();
+			var that = $(this);
 			
 			var str = "";
 			
@@ -101,8 +102,26 @@
 				str += "<input type='hidden' name='files[" + index + "]' value='" + $(this).attr("href") + "' >";
 			});
 			
-			$(this).append(str);
-			$(this).get(0).submit();
+			that.append(str);
+			that.get(0).submit();
+		});
+		
+		$(".uploadedList").on("click", ".del-btn" ,function(event){
+			event.preventDefault();
+			var that = $(this);
+			
+			$.ajax({
+				type:"POST",
+				url:"/boards/deleteFile",
+				data:{fileName:that.attr("href")},
+				dataType:"text",
+				success:function(result) {
+					console.log("RESULT: " + result);
+					if (result == "deleted") {
+						that.closest("li").remove();
+					}
+				}
+			});
 		});
 	</script>
 	

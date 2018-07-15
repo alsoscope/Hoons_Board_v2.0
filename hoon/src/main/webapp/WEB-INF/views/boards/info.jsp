@@ -173,10 +173,8 @@
 	</script>
 	
 	<script>
-		$(document).ready(function() {
-			getReplyList(1);
-			getAttachList();
-		});
+		getReplyList(1);
+		getAttachList();
 	
 		function getAttachList() {
 			var bno = "${bVO.bno}";
@@ -293,7 +291,6 @@
 		
 		$("#replies").on("click", ".list-group-item", function() {
 			var reply = $(this);
-			
 			var timelineheader = reply.find(".timeline-header").html();
 			var replytext = reply.find(".timeline-boddy").text();
 			
