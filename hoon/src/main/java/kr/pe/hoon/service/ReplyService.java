@@ -14,5 +14,5 @@ public interface ReplyService {
 	
 	public void update(ReplyVO rVO) throws Exception;
 	
-	public void delete(int rno) throws Exception;
+	public void delete(int rno, int bno) throws Exception;
 }

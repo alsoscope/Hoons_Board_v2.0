@@ -35,10 +35,12 @@ public class ReplyServiceImpl implements ReplyService {
 	public void update(ReplyVO rVO) throws Exception {
 		rDAO.update(rVO);
 	}
-
+	
 	@Override
-	public void delete(int rno) throws Exception {
+	@Transactional
+	public void delete(int rno, int bno) throws Exception {
 		rDAO.delete(rno);
+		bDAO.updateReplycnt(bno, -1);
 	}
 
 	@Override

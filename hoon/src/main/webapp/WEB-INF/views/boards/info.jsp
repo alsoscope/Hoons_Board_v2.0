@@ -66,13 +66,18 @@
 						</a>
 					</li>
 					<li>
-						<a id="delete-btn" href="${bVO.bno }" class="delete">
+						<a id="del-btn" href="${bVO.bno }" class="delete">
 							<i class="fa fa-trash-o fa-fw"></i> 삭제
 						</a>
 					</li>
 				</ul>
 			</div>
 		</div>
+		
+		<form id="del-info-form" action="/boards/${bVO.bno }" method="post">
+			<input type="hidden" name="_method" value="DELETE">
+			<input type="hidden" name="bno" value="${bVO.bno }">
+		</form>
 		
 		<ul class="mailbox-attachments clearfix uploadedList">
 		</ul>
@@ -98,7 +103,7 @@
 				</div>
 				<div class="nav" role="navigation">
 					<fieldset class="buttons">
-						<input id="submit-btn" type="submit" class="create btn btn-success btn-wide pull-right" value="등록">
+						<input id="reply-submit-btn" type="submit" class="create btn btn-success btn-wide pull-right" value="등록">
 					</fieldset>
 				</div>
 			</fieldset>
@@ -138,7 +143,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
 					<button type="button" id="reply-edit-btn" class="create btn btn-success btn-wide pull-right">저장</button>
-					<button type="button" id="reply-delete-btn" class="create btn btn-danger btn-wide pull-right">삭제</button>
+					<button type="button" id="reply-del-btn" class="create btn btn-danger btn-wide pull-right">삭제</button>
 				</div>
 			</div>
 		</div>
@@ -196,7 +201,7 @@
 			});
 		}
 		
-		$(".iploadedList").on("click", ".mailbox-attachment-info a", function(event) {
+		$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event) {
 			var fileLink = $(this).attr("href");
 			
 			if (checkImageType(fileLink)) {
@@ -212,7 +217,7 @@
 			}
 		});
 		
-		$("#submit-btn").click(function() {
+		$("#reply-submit-btn").click(function() {
 			var bno = "${bVO.bno}";
 			var replytext = $("#replytext").val();
 		
@@ -251,7 +256,6 @@
 				success:function(result) {
 					var replyList = result.replyList;
 					var pageMaker = result.pageMaker;
-					
 					var boardInfo = result.boardInfo;
 					
 					var source = $("#reply-template").html();
@@ -298,13 +302,14 @@
 			$(".modal-header").html(timelineheader);
 		});
 		
-		$("#reply-delete-btn").click(function() {
+		$("#reply-del-btn").click(function() {
 			if(confirm("정말로 삭제하시겠습니까?")) {
 				var rno = $(".list-group-item").attr("data-rno");
+				var bno = "${bVO.bno}";
 				
 				$.ajax({
 					type:"DELETE",
-					url:"/replies/" + rno,
+					url:"/replies/" + rno + "?bno=" + bno,
 					headers:{
 						"Content-Type":"application/json",
 						"X-HTTP-Method-Override":"DELETE"
@@ -365,31 +370,38 @@
 			
 			return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 		});
+		
 	</script>
 	
-	<!-- 글 관련 -->
+	<!-- Board 관련 -->
 	<script>
-		$("#delete-btn").click(function(event) {
+		$("#del-btn").click(function(event) {
 			if (confirm("정말로 삭제하시겠습니까?")) {
-				event.preventDefault();
+				var replycnt = $(".replycnt").html().replace(/[^0-9]/g, "");
 				
-				var bno = "${bVO.bno}";
-				
-				$.ajax({
-					type:"DELETE",
-					url:"/boards/" + bno,
-					headers:{
-						"Content-Type":"application/json",
-						"X-HTTP-Method-Override":"DELETE"
-					},
-					dataType:"text",
-					success:function(result) {
-						if(result == "SUCCESS") {
-							alert("삭제되었습니다.");
-							location.href="/boards";
-						}
+				if (replycnt > 0) {
+					alert("댓글이 있는 글은 삭제할 수 없습니다.");
+					return;
+				} else {
+					event.preventDefault();
+					
+					var delInfoForm = $("#del-info-form");
+					var files = [];
+					
+					$(".uploadedList li").each(function(index) {
+						files.push($(this).attr("data-src"));
+					});
+					
+					if (files.length > 0) {
+						$.ajax({
+							type:"POST",
+							url:"/boards/deleteAllFiles",
+							data:{files:files}
+						});
 					}
-				});
+					
+					delInfoForm.submit();
+				}
 			}
 		});
 	</script>

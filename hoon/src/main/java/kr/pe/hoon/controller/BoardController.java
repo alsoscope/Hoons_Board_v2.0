@@ -19,8 +19,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,6 +48,7 @@ public class BoardController {
 	@Autowired
 	private ReplyService replyService;
 	
+	// Board 관련
 	@RequestMapping(value="new", method=RequestMethod.GET)
 	public String createGET() throws Exception {
 		
@@ -57,6 +60,14 @@ public class BoardController {
 		boardService.create(bVO);
 		
 		return "redirect:/boards";
+	}
+	
+	@RequestMapping(value="{bno}", method=RequestMethod.GET)
+	public String read(@PathVariable int bno, Model model) throws Exception {
+		logger.info(boardService.readNoViewcnt(bno).toString());
+		model.addAttribute("bVO", boardService.read(bno));
+		
+		return "boards/info";
 	}
 	
 	@RequestMapping("")
@@ -73,16 +84,47 @@ public class BoardController {
 		return "boards/list";
 	}
 	
-	@RequestMapping(value="{bno}", method=RequestMethod.GET)
-	public String read(@PathVariable int bno, Model model) throws Exception {
+	@RequestMapping(value="edit/{bno}", method=RequestMethod.GET)
+	public String updateGET(@PathVariable int bno, Model model) throws Exception {
 		logger.info(boardService.readNoViewcnt(bno).toString());
-		model.addAttribute("bVO", boardService.read(bno));
+		model.addAttribute("bVO", boardService.readNoViewcnt(bno));
 		
-		return "boards/info";
+		return "boards/edit";
 	}
 	
-	@RequestMapping(value="{bno}/replies", method=RequestMethod.GET)
+	@RequestMapping(value="edit/{bno}", method=RequestMethod.POST)
+	public String updatePOST(@ModelAttribute BoardVO bVO) throws Exception {
+		boardService.update(bVO);
+		
+		return "redirect:/boards/" + bVO.getBno();
+	}
+	
+//	@ResponseBody
+//	@RequestMapping(value="{bno}", method=RequestMethod.DELETE)
+//	public ResponseEntity<String> delete(@PathVariable int bno) {
+//		ResponseEntity<String> entity = null;
+//
+//		try {
+//			boardService.delete(bno);
+//			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+//		}
+//		
+//		return entity;
+//	}
+	
+	@RequestMapping(value="{bno}", method=RequestMethod.DELETE)
+	public String delete(int bno) throws Exception {
+		boardService.delete(bno);
+		
+		return "redirect:/boards";
+	}
+	
+	// Reply 관련
 	@ResponseBody
+	@RequestMapping(value="{bno}/replies", method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> readAllReplies(@PathVariable int bno, int page) {
 		ResponseEntity<Map<String, Object>> entity = null;
 		Map<String, Object> map = new HashMap<>();
@@ -110,42 +152,8 @@ public class BoardController {
 		return entity;
 	}
 	
-	@RequestMapping("test")
-	public String test() throws Exception {
-		return "test";
-	}
 	
-	@RequestMapping(value="edit/{bno}", method=RequestMethod.GET)
-	public String updateGET(@PathVariable int bno, Model model) throws Exception {
-		logger.info(boardService.readNoViewcnt(bno).toString());
-		model.addAttribute("bVO", boardService.readNoViewcnt(bno));
-		
-		return "boards/edit";
-	}
-	
-	@RequestMapping(value="edit/{bno}", method=RequestMethod.POST)
-	public String updatePOST(@ModelAttribute BoardVO bVO) throws Exception {
-		boardService.update(bVO);
-		
-		return "redirect:/boards/" + bVO.getBno();
-	}
-	
-	@RequestMapping(value="{bno}", method=RequestMethod.DELETE)
-	@ResponseBody
-	public ResponseEntity<String> delete(@PathVariable int bno) {
-		ResponseEntity<String> entity = null;
-
-		try {
-			boardService.delete(bno);
-			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		
-		return entity;
-	}
-	
+	// Attach 관련
 	@ResponseBody
 	@RequestMapping("{bno}/attaches")
 	public List<String> readAllAttaches(@PathVariable int bno) throws Exception {
@@ -197,9 +205,9 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("deleteFile")
+	@RequestMapping(value="deleteFile", method=RequestMethod.DELETE) // POST??
 	public ResponseEntity<String> deleteFile(String fileName) {
-		logger.info("delete file" + fileName);
+		logger.info("delete file: " + fileName);
 		String formatName = fileName.substring(fileName.indexOf(".") + 1);
 		
 		MediaType mType = MediaUtils.getMediaType(formatName);
@@ -211,6 +219,32 @@ public class BoardController {
 		}
 		
 		new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+		
+		return new ResponseEntity<>("deleted", HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="deleteAllFiles", method=RequestMethod.POST)
+	public ResponseEntity<String> deleteAllFiles(@RequestParam("files[]") String[] files) {
+		logger.info("delete all files: " + files);
+		
+		if (files == null || files.length == 0) {
+			return new ResponseEntity<>("deleted", HttpStatus.OK);
+		}
+		
+		for (String fileName : files) {
+			String formatName = fileName.substring(fileName.indexOf(".") + 1);
+			
+			MediaType mType = MediaUtils.getMediaType(formatName);
+			
+			if (mType != null) {
+				String front = fileName.substring(0, 12);
+				String end = fileName.substring(14);
+				new File(uploadPath + (front + end).replace('/', File.separatorChar)).delete();
+			}
+			
+			new File(uploadPath + fileName.replace('/', File.separatorChar)).delete();
+		}
 		
 		return new ResponseEntity<>("deleted", HttpStatus.OK);
 	}

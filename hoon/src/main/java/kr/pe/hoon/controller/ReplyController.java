@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.pe.hoon.domain.ReplyVO;
+import kr.pe.hoon.service.BoardService;
 import kr.pe.hoon.service.ReplyService;
 import kr.pe.hoon.service.ReplyServiceImpl;
 
@@ -22,6 +23,9 @@ public class ReplyController {
 	
 	@Autowired
 	private ReplyService replyService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	@RequestMapping(value="new", method=RequestMethod.POST)
 	public ResponseEntity<String> create(@RequestBody ReplyVO rVO) {
@@ -55,11 +59,11 @@ public class ReplyController {
 	}
 	
 	@RequestMapping(value="{rno}", method=RequestMethod.DELETE)
-	public ResponseEntity<String> delete(@PathVariable int rno) {
+	public ResponseEntity<String> delete(@PathVariable int rno, int bno) {
 		ResponseEntity<String> entity = null;
 		
 		try {
-			replyService.delete(rno);
+			replyService.delete(rno, bno);
 			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();

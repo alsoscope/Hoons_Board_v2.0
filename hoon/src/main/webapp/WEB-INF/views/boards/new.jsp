@@ -94,8 +94,8 @@
 		
 		$("#create-form").submit(function(event) {
 			event.preventDefault();
-			var that = $(this);
 			
+			var that = $(this);
 			var str = "";
 			
 			$(".uploadedList .del-btn").each(function (index) {
@@ -108,6 +108,7 @@
 		
 		$(".uploadedList").on("click", ".del-btn" ,function(event){
 			event.preventDefault();
+			
 			var that = $(this);
 			
 			$.ajax({

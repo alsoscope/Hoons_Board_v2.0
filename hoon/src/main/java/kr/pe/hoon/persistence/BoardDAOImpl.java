@@ -26,7 +26,7 @@ public class BoardDAOImpl implements BoardDAO {
 	public BoardVO read(int bno) throws Exception {
 		return sqlSession.selectOne("board.read", bno);
 	}
-
+	
 	@Override
 	public List<String> readAllAttaches(int bno) throws Exception {
 		return sqlSession.selectList("board.readAllAttaches", bno);

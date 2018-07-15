@@ -78,7 +78,7 @@ public class BoardServiceImpl implements BoardService {
 			}
 		}
 	}
-
+	
 	@Override
 	@Transactional
 	public void delete(int bno) throws Exception {
