@@ -115,7 +115,20 @@
 		$(".uploadedList").on("click", ".del-btn" ,function(event){
 			event.preventDefault();
 			
-			$(this).closest("li").remove();
+			var that = $(this);
+			
+			$.ajax({
+				type:"POST",
+				url:"/boards/deleteFile",
+				data:{fileName:that.attr("href")},
+				dataType:"text",
+				success:function(result) {
+					console.log("RESULT: " + result);
+					if (result == "deleted") {
+						that.closest("li").remove();
+					}
+				}
+			});
 		});
 		
 		$("#edit-form").submit(function(event) {
@@ -129,41 +142,7 @@
 			});
 			
 			that.append(str);
-			
-			$.ajax({
-				type:"POST",
-				url:"/boards/deleteFile",
-				data:{fileName:that.attr("href")},
-				dataType:"text",
-				success:function(result) {
-					console.log("RESULT: " + result);
-					if (result == "deleted") {
-						that.closest("li").remove();
-					}
-				}
-			});
-			
-// 			that.get(0).submit();
-		});
-		
-		// 참고후 삭제
-		$(".uploadedList").on("click", ".del-btn" ,function(event){
-			event.preventDefault();
-			
-			var that = $(this);
-			
-			$.ajax({
-				type:"POST",
-				url:"/boards/deleteFile",
-				data:{fileName:that.attr("href")},
-				dataType:"text",
-				success:function(result) {
-					console.log("RESULT: " + result);
-					if (result == "deleted") {
-						that.closest("li").remove();
-					}
-				}
-			});
+			that.get(0).submit();
 		});
 	</script>
 <%@ include file="../include/footer.jsp" %>

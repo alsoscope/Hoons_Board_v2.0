@@ -99,22 +99,6 @@ public class BoardController {
 		return "redirect:/boards/" + bVO.getBno();
 	}
 	
-//	@ResponseBody
-//	@RequestMapping(value="{bno}", method=RequestMethod.DELETE)
-//	public ResponseEntity<String> delete(@PathVariable int bno) {
-//		ResponseEntity<String> entity = null;
-//
-//		try {
-//			boardService.delete(bno);
-//			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-//		}
-//		
-//		return entity;
-//	}
-	
 	@RequestMapping(value="{bno}", method=RequestMethod.DELETE)
 	public String delete(int bno) throws Exception {
 		boardService.delete(bno);
@@ -205,7 +189,7 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="deleteFile", method=RequestMethod.DELETE) // POST??
+	@RequestMapping(value="deleteFile", method=RequestMethod.POST) // POST??
 	public ResponseEntity<String> deleteFile(String fileName) {
 		logger.info("delete file: " + fileName);
 		String formatName = fileName.substring(fileName.indexOf(".") + 1);

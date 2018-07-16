@@ -137,7 +137,7 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="replytext" class="control-label">Message:</label>
-						<textarea style="resize: none; height: 100px" class="form-control" id="replytext-modal" placeholder="내용을 입력해 주세요." val=""></textarea>
+						<textarea style="resize: none; height: 100px" class="form-control" id="replytext-modal" placeholder="내용을 입력해 주세요."></textarea>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -357,7 +357,6 @@
 			getReplyList(page);
 		});
 		
-		// Handlebars 날짜포맷 Helper 등록
 		Handlebars.registerHelper("prettifyDate", function(date) {
 			var dateObj = new Date(date);
 			
@@ -381,6 +380,7 @@
 				
 				if (replycnt > 0) {
 					alert("댓글이 있는 글은 삭제할 수 없습니다.");
+					
 					return;
 				} else {
 					event.preventDefault();

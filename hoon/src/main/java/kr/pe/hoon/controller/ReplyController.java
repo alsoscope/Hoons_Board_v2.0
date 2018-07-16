@@ -24,9 +24,6 @@ public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 	
-	@Autowired
-	private BoardService boardService;
-	
 	@RequestMapping(value="new", method=RequestMethod.POST)
 	public ResponseEntity<String> create(@RequestBody ReplyVO rVO) {
 		ResponseEntity<String> entity = null;
