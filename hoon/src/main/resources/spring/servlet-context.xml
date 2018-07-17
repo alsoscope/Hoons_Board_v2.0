@@ -33,4 +33,19 @@
 		<beans:constructor-arg value="c:\\file\\upload"></beans:constructor-arg>
 	</beans:bean>
 	
+	<!-- 인터셉터 -->
+	<beans:bean id="loginInterceptor" class="kr.pe.hoon.interceptor.LoginInterceptor"></beans:bean>
+	<beans:bean id="authInterceptor" class="kr.pe.hoon.interceptor.AuthInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/login"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/boards/new"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>

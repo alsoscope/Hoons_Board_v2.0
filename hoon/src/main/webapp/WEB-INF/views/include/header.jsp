@@ -82,7 +82,7 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">메뉴 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"><i class="fa fa-sign-in"></i> 로그인</a></li>
+							<li><a href="/user/login"><i class="fa fa-sign-in"></i> 로그인</a></li>
 							<li><a href="#"><i class="fa fa-user"></i> 회원가입</a></li>
 							<li><a href="#"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
 							<li><a href="#"><i class="fa fa-user"></i> 내 정보</a></li>
