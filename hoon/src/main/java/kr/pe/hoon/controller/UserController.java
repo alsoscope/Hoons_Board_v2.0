@@ -1,11 +1,8 @@
 package kr.pe.hoon.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,13 +16,15 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	// @ModelAttribute("lDTO") LoginDTO lDTO 필요없어도 되나
 	@RequestMapping(value="login", method=RequestMethod.GET)
-	public void loginGET(@ModelAttribute("lDTO") LoginDTO lDTO) {
+	public void loginGET() {
 		
 	}
 	
-	@RequestMapping(value="login", method=RequestMethod.POST)
-	public void loginPOST(LoginDTO lDTO, HttpSession session, Model model) throws Exception {
+	// HttpSession session 필요없어도 되나
+	@RequestMapping(value="loginPost", method=RequestMethod.POST)
+	public void loginPOST(LoginDTO lDTO, Model model) throws Exception {
 		UserVO uVO = userService.login(lDTO);
 		
 		if (uVO == null) {

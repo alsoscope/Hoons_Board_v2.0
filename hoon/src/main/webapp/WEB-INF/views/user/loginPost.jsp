@@ -4,5 +4,5 @@
 <%@ include file="../include/header.jsp" %>
 	
 	<script>
-		location.href="/boards";
+		location.href="/user/login";
 	</script>

@@ -39,13 +39,16 @@
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/user/login"/>
+			<mapping path="/user/loginPost"/>
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
-		
+	</interceptors>
+	
+	<interceptors>
 		<interceptor>
 			<mapping path="/boards/new"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>
+	
 </beans:beans>

@@ -7,7 +7,7 @@
 		<div class="col-lg-4"></div>
 			<div class="col-lg-4">
 				<div class="jumbotron" style="padding-top: 20px;" align="center">
-					<form action="/user/login" method="post">
+					<form action="/user/loginPost" method="post">
 						<h3>로그인</h3>
 						<div class="form-group">
 							<input class="form-control" type="text" id="uid" name="uid" value="${cookie.savedId.value }" placeholder="아이디">

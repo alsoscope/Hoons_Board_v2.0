@@ -61,20 +61,21 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Hoon's Board v2.0</a>
+				<ul class="nav navbar-nav">
+					<li id="home" class="active">
+						<a class="navbar-brand" href="/">Hoon's Board v2.0</a>
+					</li>
+				</ul>
 			</div>
 	
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-				<li id="main">
-					<a href="/main">메인</a>
-				</li>
-				<li id="board">	
-					<a href="/boards">게시판</a>
-				</li>
-				<li id="contact">	
-					<a href="/cotact">Contact</a>
-				</li>
+					<li id="board">	
+						<a href="/boards">Board</a>
+					</li>
+					<li id="about">	
+						<a href="/about">About</a>
+					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li style="padding: 10px"><h5 style="color: white;">
@@ -96,21 +97,17 @@
 	</nav>
 
 	<script>
-		$(document).ready(function() {
-			var url = location.href;
-			var idxMain = url.indexOf("main");
-		    var idxBoard = url.indexOf("board");
-		    var idxContact = url.indexOf("contact");
-	
-		    if(idxMain != -1) {
-		        $("#main").addClass("active");
-		    }
-		    if(idxBoard != -1) {
-		        $("#board").addClass("active");
-		    }
-		    if(idxContact != -1) {
-		        $("#contact").addClass("active");
-		    }
-		});	
+		var url = location.href;
+	    var idxBoard = url.indexOf("board");
+	    var idxAbout = url.indexOf("about");
+
+	    if(idxBoard != -1) {
+	        $("#board").addClass("active");
+	        $("#home").removeClass("active");
+	    }
+	    if(idxAbout != -1) {
+	        $("#about").addClass("active");
+	        $("#home").removeClass("active");
+	    }
 	</script>
 	

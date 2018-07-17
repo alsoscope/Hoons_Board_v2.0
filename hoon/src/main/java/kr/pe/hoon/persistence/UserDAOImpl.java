@@ -11,10 +11,10 @@ import kr.pe.hoon.dto.LoginDTO;
 public class UserDAOImpl implements UserDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	
+
 	@Override
 	public UserVO read(LoginDTO lDTO) throws Exception {
 		return sqlSession.selectOne("user.read", lDTO);
 	}
-
+	
 }
