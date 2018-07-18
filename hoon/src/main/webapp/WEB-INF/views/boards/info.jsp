@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../include/header.jsp" %>
 
-	<div class="container" style="margin-bottom: 10px">
+	<div class="container" style="margin-bottom: 10px; max-width: 70%;">
 		<font size="6">글 보기</font><br>
 		<a href="/boards/new" class="create btn btn-success btn-wide pull-right">
 			<i class="fa fa-pencil"></i> 새 글 쓰기
@@ -12,7 +12,7 @@
 	</div>
 	
 	<!-- 글 보기 -->
-	<div class="container"  style="margin-bottom: 50px">
+	<div class="container"  style="margin-bottom: 50px; max-width: 70%;">
 		<div class="panel-body">
 			<div class="table-responsive">
 				<div>
@@ -42,7 +42,11 @@
 					</tr>
 					<tr>
 						<th rowspan="2">작성자</th>
-						<td rowspan="2">IMG</td>
+						<td rowspan="2">
+							<a href="#">
+								<img class="media-object" src="..." alt="IMG">
+							</a>
+						</td>
 						<td>${bVO.writer }</td>
 						<fmt:formatDate var="regdate" value="${bVO.regdate }" pattern="yyyy-MM-dd hh:mm:ss"/>
 					</tr>
@@ -55,6 +59,7 @@
 					</tr>
 				</table>
 			</div>
+			<c:if test="${login.uid == bVO.writer }">
 			<div class="dropdown" align="left" style="margin-left: 10px">
 				<a href="javascript://" data-toggle="dropdown">
 					<i class="fa fa-cog fa-2x" data-toggle="tooltip" data-placement="left" data-original-title="게시물 설정"></i>
@@ -71,6 +76,7 @@
 						</a>
 					</li>
 				</ul>
+			</c:if>
 			</div>
 		</div>
 		
@@ -91,10 +97,11 @@
 	</div>
 	
 	<!-- 댓글 쓰기 -->
-	<div class="container">
+	<div class="container" style="max-width: 70%;">
 		<div class="panel-body">
 			<h3 style="display: inline;">댓글</h3>
 			<h3 class="replycnt" style="display: inline;"></h3>
+			<c:if test="${login.uid != null }">
 			<fieldset class="form">
 				<div class="form-group  has-feedback">
 					<div class="form-group">
@@ -107,10 +114,18 @@
 					</fieldset>
 				</div>
 			</fieldset>
+			</c:if>
+			<c:if test="${login.uid == null }">
+				<div class="panel-body" style="background: white; margin-top: 20px;">
+					<h5 class="text-center">
+						<a href="/user/login" class="link">로그인</a>을 하시면 답변을 등록할 수 있습니다.
+					</h5>
+            	</div>
+			</c:if>
 		</div>
 	</div>
 	
-	<div class="container">
+	<div class="container" style="max-width: 70%;">
 	
 		<!-- 댓글 목록 -->
 		<div>
@@ -137,7 +152,7 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="replytext" class="control-label">Message:</label>
-						<textarea style="resize: none; height: 100px" class="form-control" id="replytext-modal" placeholder="내용을 입력해 주세요."></textarea>
+						<textarea style="resize: none; height: 100%" class="form-control" id="replytext-modal" placeholder="내용을 입력해 주세요."></textarea>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -162,18 +177,27 @@
 	
 	<script id="reply-template" type="text/x-handlebars-template">
 		{{#each .}}
-		<li class="list-group-item" data-rno={{rno}}>
-			<div class="timeline-item">
-				<span class="time">
-					<i class="fa fa-clock-o"></i> {{prettifyDate regdate}}
-				</span>
-				<h5 class="timeline-header"><i class="fa fa-comment"></i> <strong>reply{{rno}}</strong> - {{replywriter}}</h5>
-				<div class="timeline-boddy">{{replytext}}</div>
-				<div class="timeline-footer" style="margin-top: 10px">
-					<button type='button' class='btn btn-info' data-toggle='modal' data-target='#replyModal'>관리</button>
+			<li class="list-group-item" data-rno={{rno}}>
+				<div class="timeline-item">
+					<div class="media-left" style="margin-top: 10px; margin-right: 10px;">
+						<a href="#">
+							<img class="media-object" src="..." alt="IMG">
+						</a>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading">{{replywriter}}</h4>
+						<span class="time">
+							<i class="fa fa-clock-o"></i> {{prettifyDate regdate}}
+						</span>
+					</div>
+					<div class="timeline-boddy" style="margin-top: 10px; margin-bottom: 30px;">{{replytext}}</div>
+					{{#eqReplywriter replywriter}}
+						<div class="timeline-footer" style="margin-top: 10px">
+							<button type='button' class='btn btn-info' data-toggle='modal' data-target='#replyModal'>관리</button>
+						</div>
+					{{/eqReplywriter}}
 				</div>
-			</div>
-		</li>
+			</li>
 		{{/each}}
 	</script>
 	
@@ -220,6 +244,7 @@
 		$("#reply-submit-btn").click(function() {
 			var bno = "${bVO.bno}";
 			var replytext = $("#replytext").val();
+			var replywriter = "${login.uid}";
 		
 			$.ajax({
 				type:"POST",
@@ -231,7 +256,7 @@
 				data:JSON.stringify({
 					bno:bno,
 					replytext:replytext,
-					replywriter:"22"	/////////////////////////////////////////////// 세션처리 후 필히 수정!!
+					replywriter:replywriter
 				}),
 				dataType:"text",
 				success:function() {
@@ -370,6 +395,15 @@
 			return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 		});
 		
+		Handlebars.registerHelpter("eqReplywriter", function(replywriter, block) {
+			var accum = "";
+		
+			if (replywriter == "${login.uid}") {
+				accum += block.fn();
+			}
+			
+			return accum;
+		});
 	</script>
 	
 	<!-- Board 관련 -->

@@ -2,7 +2,7 @@
 		pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 
-	<div class="container">
+	<div class="container" style="max-width: 70%;">
 		<div class="panel-body">
 			<h2>수정하기</h2>
 			<form action="/boards/edit/${bVO.bno }" method="post" id="edit-form" class="create-form">
@@ -31,7 +31,11 @@
 						<div id="popup_front" class="popup front" style="display: none;"></div>
 						<img id="popup_img">
 					</div>
-
+	
+					<div>
+						<hr color="gray">
+					</div>
+				
 					<div class="nav" role="navigation">
 						<fieldset class="buttons">
 							<a href="/boards" class="btn btn-default btn-wide" onclick="return confirm('정말로 취소하시겠습니까?')">취소</a> 

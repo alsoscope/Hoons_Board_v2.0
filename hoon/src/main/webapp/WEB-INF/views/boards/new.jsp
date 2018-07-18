@@ -2,18 +2,31 @@
 		pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 
-	<div class="container">
+	<div class="container" style="max-width: 70%;">
 		<div class="panel-body">
-			<h2>새 글 쓰기</h2>
+			<h2 style="display: inline;">새 글 쓰기</h2>
+			<ul class="media-list" style="margin-top: 20px;">
+				<li class="media">
+					<div class="media-left">
+						<a href="#">
+							<img class="media-object" src="..." alt="IMG">
+						</a>
+					</div>
+					<div class="media-body">
+						<h4 style="display: inline;" class="media-heading">${login.uid }</h4>
+					</div>
+				</li>
+			</ul>
 			<div class="form-group">
 			<form action="/boards/new" method="post" id="create-form" class="create-form">
 				<fieldset class="form">
 					<div class="form-group  has-feedback">
 						<div class="form-group">
+							<input type="hidden" name="writer" value="${login.uid }">
 							<input class="form-control" type="text" name="title" placeholder="제목을 입력해 주세요.">
 						</div>
 						<div class="form-group">
-							<textarea class="form-control" name="content" style="height: 200px; resize: none" placeholder="내용을 입력해 주세요."></textarea>
+							<textarea class="form-control" name="content" style="height: 250px; resize: none" placeholder="내용을 입력해 주세요."></textarea>
 						</div>
 					</div>
 				</fieldset>
