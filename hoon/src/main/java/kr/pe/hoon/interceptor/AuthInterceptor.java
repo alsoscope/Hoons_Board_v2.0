@@ -1,15 +1,24 @@
 package kr.pe.hoon.interceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.util.WebUtils;
+
+import kr.pe.hoon.domain.UserVO;
+import kr.pe.hoon.service.UserService;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
 	private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
+	
+	@Autowired
+	private UserService userService;
 	
 	private void saveDest(HttpServletRequest request) {
 		String uri = request.getRequestURI();
@@ -34,6 +43,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		if (session.getAttribute("login") == null) {
 			logger.info("current user is not logined");
 			saveDest(request);
+			
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			
+			if (loginCookie != null) {
+				UserVO uVO = userService.readForCheckSession(loginCookie.getValue());
+				logger.info("uVO: " + uVO);
+				
+				if (uVO != null) {
+					session.setAttribute("login", uVO);
+					return true;
+				}
+			}
 			
 			response.sendRedirect("/user/login");
 			return false;

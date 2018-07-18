@@ -4,5 +4,5 @@
 <%@ include file="../include/header.jsp" %>
 	
 	<script>
-		location.href="/user/login";
+		self.location="/user/login?login_error=1";
 	</script>

@@ -1,5 +1,7 @@
 package kr.pe.hoon.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO login(LoginDTO lDTO) throws Exception {
 		return uDAO.read(lDTO);
+	}
+
+	@Override
+	public UserVO readForCheckSession(String value) throws Exception {
+		return uDAO.readForCheckSession(value);
+	}
+
+	@Override
+	public void updateForLogin(String uid, String sessionid, Date next) throws Exception {
+		uDAO.updateForLogin(uid, sessionid, next);
 	}
 
 }

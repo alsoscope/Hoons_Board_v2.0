@@ -1,5 +1,6 @@
 package kr.pe.hoon.interceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -28,6 +29,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 		HttpSession session = request.getSession();
+
 		ModelMap modelMap = modelAndView.getModelMap();
 		Object uVO = modelMap.get("uVO");
 		
@@ -35,9 +37,18 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			logger.info("new login success");
 			session.setAttribute("login", uVO);
 			
-			String dest = (String) session.getAttribute("dest");
+			if (request.getParameter("useCookie") != null) {
+				logger.info("use cookie........");
+				Cookie loginCookie = new Cookie("loginCookie", session.getId());
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(60 * 60 * 24 * 7);
+				response.addCookie(loginCookie);
+			}
 			
-			response.sendRedirect(dest != null ? dest : "/");
+			String dest = (String) session.getAttribute("dest");
+			String redirectURI = (String) session.getAttribute("redirectURI");
+			
+			response.sendRedirect(dest != null ? dest : redirectURI);
 		}
 	}
 }

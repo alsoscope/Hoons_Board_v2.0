@@ -1,5 +1,10 @@
 package kr.pe.hoon.controller;
 
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,21 +21,27 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	// @ModelAttribute("lDTO") LoginDTO lDTO 필요없어도 되나
 	@RequestMapping(value="login", method=RequestMethod.GET)
-	public void loginGET() {
+	public String loginGET(HttpServletRequest request) {
+		String referer = request.getHeader("Referer");
+		request.getSession().setAttribute("redirectURI", referer);
 		
+		return "/user/login";
 	}
 	
-	// HttpSession session 필요없어도 되나
 	@RequestMapping(value="loginPost", method=RequestMethod.POST)
-	public void loginPOST(LoginDTO lDTO, Model model) throws Exception {
+	public void loginPOST(LoginDTO lDTO, Model model, HttpSession session) throws Exception {
 		UserVO uVO = userService.login(lDTO);
 		
-		if (uVO == null) {
-			return;
-		}
+		if (uVO == null) { return; }
 		
 		model.addAttribute("uVO", uVO);
+		
+		if (lDTO.isUsecookie()) {
+			int amount = 60 * 60 * 24 * 7;
+			Date sessionlimit = new Date(System.currentTimeMillis() + (1000 * amount));
+			
+			userService.updateForLogin(uVO.getUid(), session.getId(), sessionlimit);
+		}
 	}
 }

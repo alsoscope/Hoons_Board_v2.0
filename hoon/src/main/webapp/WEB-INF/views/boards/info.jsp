@@ -395,7 +395,7 @@
 			return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 		});
 		
-		Handlebars.registerHelpter("eqReplywriter", function(replywriter, block) {
+		Handlebars.registerHelper("eqReplywriter", function(replywriter, block) {
 			var accum = "";
 		
 			if (replywriter == "${login.uid}") {
