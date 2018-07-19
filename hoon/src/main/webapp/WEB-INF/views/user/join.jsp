@@ -38,7 +38,7 @@
 						<div class="form-group">
 							<input class="form-control" type="email" id="email" name="email" placeholder="이메일">
 						</div>
-							<input class="btn btn-primary form-control" type="submit" value="회원가입">
+							<input id="submit-btn" class="btn btn-primary form-control" disabled="disabled" type="submit" value="회원가입">
 					</form>
 				</div>
 			</div>
@@ -48,28 +48,29 @@
 	<script>
 		var passwordCkBtn = $("#password-ck-btn");
 		var passwordCk = $("#password-ck");
+		var submitBtn = $("#submit-btn");
 		
 		var pw = $("#pw");
 		var pwck = $("#pwck");
 		
-		pw.keyup(function(){
-			if ((pw.val() == pwck.val()) && pw.val().length >= 4) {
+		function chekPw() {
+			if (pw.val() == pwck.val() && pw.val().length >= 4 && pwck.val().length >= 4) {
 				passwordCkBtn.css("color", "#6ce945");
 				passwordCk.css("color", "black");
+				submitBtn.removeAttr("disabled");
 			} else {
 				passwordCkBtn.css("color", "gray");
 				passwordCk.css("color", "gray");
+				submitBtn.attr("disabled", "disabled");
 			}
+		}
+		
+		pw.keyup(function() {
+			chekPw();
 		});
 		
 		pwck.keyup(function() {
-			if ((pwck.val() == pw.val()) && pwck.val().length >= 4) {
-				passwordCkBtn.css("color", "#6ce945");
-				passwordCk.css("color", "black");
-			} else {
-				passwordCkBtn.css("color", "gray");
-				passwordCk.css("color", "gray");
-			}
+			chekPw();
 		});
 	</script>
 

@@ -44,7 +44,7 @@
 						<th rowspan="2">작성자</th>
 						<td rowspan="2">
 							<a href="#">
-								<img class="media-object" src="..." alt="IMG">
+<!-- 								<img class="media-object" src="..." alt="IMG"> -->
 							</a>
 						</td>
 						<td>${bVO.writer }</td>
@@ -87,11 +87,6 @@
 		
 		<ul class="mailbox-attachments clearfix uploadedList">
 		</ul>
-		
-		<div class="popup back" style="display: none;">
-			<div id="popup_front" class="popup front" style="display: none;"></div>
-			<img id="popup_img">
-		</div>
 		
 		<hr style="border-width: 1px; border-color: gray">	
 	</div>
@@ -224,22 +219,6 @@
 				}
 			});
 		}
-		
-		$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event) {
-			var fileLink = $(this).attr("href");
-			
-			if (checkImageType(fileLink)) {
-				event.preventDefault();
-				
-				var imgTag = $("#pop_img");
-				imgTag.attr("src", fileLink);
-				console.log(imgTag.attr("src"));
-				
-				$("#popup_img").click(function() {
-					$(".popup").hide("slow");
-				});
-			}
-		});
 		
 		$("#reply-submit-btn").click(function() {
 			var bno = "${bVO.bno}";

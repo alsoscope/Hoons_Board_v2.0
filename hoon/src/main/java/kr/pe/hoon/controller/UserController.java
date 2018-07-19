@@ -33,7 +33,9 @@ public class UserController {
 	public void loginPOST(LoginDTO lDTO, Model model, HttpSession session) throws Exception {
 		UserVO uVO = userService.login(lDTO);
 		
-		if (uVO == null) { return; }
+		if (uVO == null) {
+			return; 
+		}
 		
 		model.addAttribute("uVO", uVO);
 		

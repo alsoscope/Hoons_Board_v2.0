@@ -59,4 +59,5 @@ public class UserVO {
 		return "UserVO [uid=" + uid + ", pw=" + pw + ", name=" + name + ", gender=" + gender + ", email=" + email
 				+ ", thumbnail=" + thumbnail + ", joindate=" + joindate + "]";
 	}
+	
 }

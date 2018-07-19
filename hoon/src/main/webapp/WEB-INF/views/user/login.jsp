@@ -27,7 +27,7 @@
 							<input type="hidden" name="uri" value="${param.uri }">
 						</div>
 						<div class="form-group">
-							<input class="btn btn-primary form-control" type="submit" value="로그인">
+							<input id="formform" class="btn btn-primary form-control" type="submit" value="로그인">
 						</div>
 						<div class="form-group">
 							<h6>아직 회원이 아니신가요?</h6>

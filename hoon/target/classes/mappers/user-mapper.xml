@@ -4,6 +4,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="user">
+	<insert id="create">
+		insert into tbl_user(uid, pw, name, gender, email, joindate)
+		values ()
+	</insert>
+
 	<select id="read" resultType="UserVO">
 		select *
 		from tbl_user
