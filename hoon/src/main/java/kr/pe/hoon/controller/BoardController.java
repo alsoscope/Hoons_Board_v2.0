@@ -189,7 +189,7 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="deleteFile", method=RequestMethod.POST) // POST??
+	@RequestMapping(value="deleteFile", method=RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName) {
 		logger.info("delete file: " + fileName);
 		String formatName = fileName.substring(fileName.indexOf(".") + 1);

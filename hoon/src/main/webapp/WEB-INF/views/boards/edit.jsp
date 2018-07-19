@@ -116,23 +116,16 @@
 			});
 		}
 		
+		var deleteFiles = [];
+		
 		$(".uploadedList").on("click", ".del-btn" ,function(event){
 			event.preventDefault();
 			
-			var that = $(this);
-			
-			$.ajax({
-				type:"POST",
-				url:"/boards/deleteFile",
-				data:{fileName:that.attr("href")},
-				dataType:"text",
-				success:function(result) {
-					console.log("RESULT: " + result);
-					if (result == "deleted") {
-						that.closest("li").remove();
-					}
-				}
+			$(this).closest("li").each(function(index) {
+				deleteFiles.push($(this).attr("data-src"));
 			});
+			
+			$(this).closest("li").remove();
 		});
 		
 		$("#edit-form").submit(function(event) {
@@ -144,6 +137,14 @@
 			$(".uploadedList .del-btn").each(function (index) {
 				str += "<input type='hidden' name='files[" + index + "]' value='" + $(this).attr("href") + "' >";
 			});
+			
+			if (deleteFiles.length > 0) {
+				$.ajax({
+					type:"POST",
+					url:"/boards/deleteAllFiles",
+					data:{files:deleteFiles}
+				});
+			}
 			
 			that.append(str);
 			that.get(0).submit();
