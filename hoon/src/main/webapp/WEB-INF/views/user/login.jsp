@@ -20,7 +20,7 @@
 							<input class="form-control" type="text" id="uid" name="uid" value="${cookie.savedId.value }" placeholder="아이디">
 						</div>
 						<div class="form-group">
-							<input class="form-control" type="password" id="upw" name="upw" placeholder="비밀번호">
+							<input class="form-control" type="password" id="pw" name="pw" placeholder="비밀번호">
 						</div>
 						<div class="form-group">
 							<input style="margin-right: 5px" type="checkbox" name="useCookie">로그인 유지
@@ -31,10 +31,12 @@
 						</div>
 						<div class="form-group">
 							<h6>아직 회원이 아니신가요?</h6>
-							<input onclick="location.href='#'" class="btn btn-primary form-control" type="button" value="회원가입">
+							<input onclick="location.href='/user/join'" class="btn btn-primary form-control" type="button" value="회원가입">
 						</div>
 					</form>
 				</div>
 			</div>
 		<div class="col-lg-4"></div>
 	</div>
+	
+<%@ include file="../include/footer.jsp" %>

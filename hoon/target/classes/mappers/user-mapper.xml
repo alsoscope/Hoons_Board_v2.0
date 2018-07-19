@@ -5,9 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="user">
 	<select id="read" resultType="UserVO">
-		select uid, upw, uname
+		select *
 		from tbl_user
-		where uid = #{uid} and upw = #{upw}
+		where uid = #{uid} and pw = #{pw}
 	</select>
 	
 	<select id="readForCheckSession" resultType="UserVO">

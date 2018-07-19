@@ -44,4 +44,9 @@ public class UserController {
 			userService.updateForLogin(uVO.getUid(), session.getId(), sessionlimit);
 		}
 	}
+	
+	@RequestMapping(value="join", method=RequestMethod.GET)
+	public String joinGET() {
+		return "/user/join";
+	}
 }

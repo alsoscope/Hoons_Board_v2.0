@@ -1,10 +1,15 @@
 package kr.pe.hoon.domain;
 
+import java.util.Date;
+
 public class UserVO {
 	private String uid;
-	private String upw;
-	private String uname;
-	private int upoint;
+	private String pw;
+	private String name;
+	private String gender;
+	private String email;
+	private String thumbnail;
+	private Date joindate;
 	
 	public String getUid() {
 		return uid;
@@ -12,28 +17,46 @@ public class UserVO {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	public String getUpw() {
-		return upw;
+	public String getPw() {
+		return pw;
 	}
-	public void setUpw(String upw) {
-		this.upw = upw;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
-	public String getUname() {
-		return uname;
+	public String getName() {
+		return name;
 	}
-	public void setUname(String uname) {
-		this.uname = uname;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public int getUpoint() {
-		return upoint;
+	public String getGender() {
+		return gender;
 	}
-	public void setUpoint(int upoint) {
-		this.upoint = upoint;
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	public Date getJoindate() {
+		return joindate;
+	}
+	public void setJoindate(Date joindate) {
+		this.joindate = joindate;
 	}
 	
 	@Override
 	public String toString() {
-		return "UserVO [uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", upoint=" + upoint + "]";
+		return "UserVO [uid=" + uid + ", pw=" + pw + ", name=" + name + ", gender=" + gender + ", email=" + email
+				+ ", thumbnail=" + thumbnail + ", joindate=" + joindate + "]";
 	}
-	
 }

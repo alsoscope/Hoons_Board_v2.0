@@ -2,7 +2,7 @@ package kr.pe.hoon.dto;
 
 public class LoginDTO {
 	private String uid;
-	private String upw;
+	private String pw;
 	private boolean usecookie;
 	
 	public String getUid() {
@@ -11,11 +11,11 @@ public class LoginDTO {
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	public String getUpw() {
-		return upw;
+	public String getpw() {
+		return pw;
 	}
-	public void setUpw(String upw) {
-		this.upw = upw;
+	public void setpw(String pw) {
+		this.pw = pw;
 	}
 	public boolean isUsecookie() {
 		return usecookie;
@@ -26,7 +26,7 @@ public class LoginDTO {
 	
 	@Override
 	public String toString() {
-		return "LoginDTO [uid=" + uid + ", upw=" + upw + ", usecookie=" + usecookie + "]";
+		return "LoginDTO [uid=" + uid + ", pw=" + pw + ", usecookie=" + usecookie + "]";
 	}
 	
 }
