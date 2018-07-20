@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.pe.hoon.domain.ReplyVO;
-import kr.pe.hoon.service.BoardService;
 import kr.pe.hoon.service.ReplyService;
 import kr.pe.hoon.service.ReplyServiceImpl;
 

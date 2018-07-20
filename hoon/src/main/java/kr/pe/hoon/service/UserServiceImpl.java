@@ -15,10 +15,24 @@ public class UserServiceImpl implements UserService {
 	private UserDAO uDAO;
 	
 	@Override
+	public void create(UserVO uVO) throws Exception {
+		uDAO.create(uVO);
+	}
+	@Override
 	public UserVO login(LoginDTO lDTO) throws Exception {
 		return uDAO.read(lDTO);
 	}
 
+	@Override
+	public UserVO readByUid(String uid) throws Exception {
+		return uDAO.readByUid(uid);
+	}
+	
+	@Override
+	public UserVO readByEmail(String email) throws Exception {
+		return uDAO.readByEmail(email);
+	}
+	
 	@Override
 	public UserVO readForCheckSession(String value) throws Exception {
 		return uDAO.readForCheckSession(value);

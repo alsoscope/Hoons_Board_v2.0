@@ -17,10 +17,25 @@ public class UserDAOImpl implements UserDAO {
 	private SqlSession sqlSession;
 
 	@Override
+	public void create(UserVO uVO) throws Exception {
+		sqlSession.insert("user.create", uVO);
+	}
+
+	@Override
 	public UserVO read(LoginDTO lDTO) throws Exception {
 		return sqlSession.selectOne("user.read", lDTO);
 	}
 
+	@Override
+	public UserVO readByUid(String uid) throws Exception {
+		return sqlSession.selectOne("user.readByUid", uid);
+	}
+	
+	@Override
+	public UserVO readByEmail(String email) throws Exception {
+		return sqlSession.selectOne("user.readByEmail", email);
+	}
+	
 	@Override
 	public UserVO readForCheckSession(String value) throws Exception {
 		return sqlSession.selectOne("user.readForCheckSession", value);

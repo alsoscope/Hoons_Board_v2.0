@@ -148,25 +148,23 @@
 	</script>
 	
 	<script>
-		$(document).ready(function() {
-			var url = location.href;
-			var idxLikecnt = url.indexOf("sort=likecnt");
-			var idxReplycnt = url.indexOf("sort=replycnt");
-			var idxViewcnt = url.indexOf("sort=viewcnt");
-			
-		    if(idxLikecnt != -1) {
-		        $("#likecnt").addClass("active");
-		        $("#bno").removeClass("active");
-		    }
-		    if(idxReplycnt != -1) {
-		        $("#replycnt").addClass("active");
-		        $("#bno").removeClass("active");
-		    }
-		    if(idxViewcnt != -1) {
-		        $("#viewcnt").addClass("active");
-		        $("#bno").removeClass("active");
-		    }
-		});
+		var url = location.href;
+		var idxLikecnt = url.indexOf("sort=likecnt");
+		var idxReplycnt = url.indexOf("sort=replycnt");
+		var idxViewcnt = url.indexOf("sort=viewcnt");
+		
+	    if(idxLikecnt != -1) {
+	        $("#likecnt").addClass("active");
+	        $("#bno").removeClass("active");
+	    }
+	    if(idxReplycnt != -1) {
+	        $("#replycnt").addClass("active");
+	        $("#bno").removeClass("active");
+	    }
+	    if(idxViewcnt != -1) {
+	        $("#viewcnt").addClass("active");
+	        $("#bno").removeClass("active");
+	    }
 	</script>
 
 <%@ include file="../include/footer.jsp" %>

@@ -6,13 +6,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="user">
 	<insert id="create">
 		insert into tbl_user(uid, pw, name, gender, email, joindate)
-		values ()
+		values (#{uid}, #{pw}, #{name}, #{gender}, #{email}, #{joindate})
 	</insert>
 
 	<select id="read" resultType="UserVO">
 		select *
 		from tbl_user
 		where uid = #{uid} and pw = #{pw}
+	</select>
+	
+	<select id="readByUid" resultType="UserVO">
+		select *
+		from tbl_user
+		where uid = #{uid}
+	</select>
+	
+	<select id="readByEmail" resultType="UserVO">
+		select *
+		from tbl_user
+		where eamil = #{email}
 	</select>
 	
 	<select id="readForCheckSession" resultType="UserVO">
