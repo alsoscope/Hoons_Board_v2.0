@@ -32,11 +32,6 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public UserVO readByEmail(String email) throws Exception {
-		return sqlSession.selectOne("user.readByEmail", email);
-	}
-	
-	@Override
 	public UserVO readForCheckSession(String value) throws Exception {
 		return sqlSession.selectOne("user.readForCheckSession", value);
 	}

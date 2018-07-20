@@ -12,8 +12,6 @@ public interface UserService {
 	
 	public UserVO readByUid(String uid) throws Exception;
 	
-	public UserVO readByEmail(String email) throws Exception;
-	
 	public UserVO readForCheckSession(String value) throws Exception;
 	
 	public void updateForLogin(String uid, String sessionid, Date next) throws Exception;

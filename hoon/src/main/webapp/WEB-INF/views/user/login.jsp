@@ -17,7 +17,7 @@
                     	</c:if>
 						<h3>로그인</h3>
 						<div class="form-group">
-							<input class="form-control" type="text" id="uid" name="uid" value="${cookie.savedId.value }" placeholder="아이디">
+							<input class="form-control" type="text" id="uid" name="uid" value="${cookie.savedId.value }" placeholder="아이디" autocomplete="off">
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="password" id="pw" name="pw" placeholder="비밀번호">

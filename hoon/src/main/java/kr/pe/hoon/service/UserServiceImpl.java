@@ -29,11 +29,6 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserVO readByEmail(String email) throws Exception {
-		return uDAO.readByEmail(email);
-	}
-	
-	@Override
 	public UserVO readForCheckSession(String value) throws Exception {
 		return uDAO.readForCheckSession(value);
 	}

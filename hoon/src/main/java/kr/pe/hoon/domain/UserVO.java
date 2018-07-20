@@ -7,7 +7,6 @@ public class UserVO {
 	private String pw;
 	private String name;
 	private String gender;
-	private String email;
 	private String thumbnail;
 	private Date joindate;
 	
@@ -35,12 +34,6 @@ public class UserVO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	public String getThumbnail() {
 		return thumbnail;
 	}
@@ -56,8 +49,7 @@ public class UserVO {
 	
 	@Override
 	public String toString() {
-		return "UserVO [uid=" + uid + ", pw=" + pw + ", name=" + name + ", gender=" + gender + ", email=" + email
-				+ ", thumbnail=" + thumbnail + ", joindate=" + joindate + "]";
+		return "UserVO [uid=" + uid + ", pw=" + pw + ", name=" + name + ", gender=" + gender + ", thumbnail="
+				+ thumbnail + ", joindate=" + joindate + "]";
 	}
-	
 }

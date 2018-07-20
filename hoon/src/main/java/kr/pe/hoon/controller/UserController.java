@@ -56,6 +56,7 @@ public class UserController {
 		return "/user/join";
 	}
 	
+	// 회원가입 구현하자
 	@RequestMapping(value="join", method=RequestMethod.POST)
 	public String joinPost(UserVO uVO, Model model) throws Exception {
 		return "";
@@ -63,31 +64,21 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value="joinIdCheck", method=RequestMethod.POST)
-	public ResponseEntity<String> joinIdCheck(@RequestParam("uid") String uid) throws Exception {
+	public ResponseEntity<String> joinIdCheck(@RequestParam("uid") String uid) {
 		ResponseEntity<String> entity = null;
 		
-		System.out.println("받은 uid: " + uid);
-		
-		if (userService.readByUid(uid) != null) {
-			entity = new ResponseEntity<>("ID_DUP", HttpStatus.NOT_FOUND);
-		} else {
-			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+		try {
+			if (userService.readByUid(uid) != null) {
+				entity = new ResponseEntity<>("ID_DUP", HttpStatus.OK);
+			} else {
+				entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		
 		return entity;
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="joinEmailCheck", method=RequestMethod.POST)
-	public ResponseEntity<String> joinEmailCheck(String email) throws Exception {
-		ResponseEntity<String> entity = null;
-		
-		if (userService.readByEmail(email) != null) {
-			entity = new ResponseEntity<>("EMAIL_DUP", HttpStatus.NOT_FOUND);
-		} else {
-			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-		}
-		
-		return entity;
-	}
 }
