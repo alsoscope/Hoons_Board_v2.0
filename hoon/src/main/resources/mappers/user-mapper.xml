@@ -16,9 +16,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="readByUid" resultType="UserVO">
-		select *
+		select uid
 		from tbl_user
 		where uid = #{uid}
+	</select>
+	
+	<select id="readByEmail" resultType="UserVO">
+		select email
+		from tbl_user
+		where email = #{email}
 	</select>
 	
 	<select id="readForCheckSession" resultType="UserVO">

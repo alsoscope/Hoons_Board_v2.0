@@ -42,8 +42,11 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<input class="form-control" type="email" id="email" name="email" placeholder="이메일" autocomplete="off">
+						</div>
+						<div class="form-group">
 							<span id="email-msg" style="color: red"></span>
-						</div>	
+						</div>
 						<input id="submit-btn" class="btn btn-primary form-control" disabled="disabled" type="submit" value="회원가입">
 					</form>
 				</div>
@@ -125,11 +128,9 @@
 		function nameCheck() {
 			if (nameObj.val() == "" || nameObj.val() == null) {
 				nameMsg.text("이름은 필수항목입니다.");
-				
 				nameResult = false;
 			} else {
 				nameMsg.text("");
-				
 				nameResult = true;
 			}
 			
@@ -141,15 +142,53 @@
 			finalCheck();
 		});
 		
-		// 위 메소드 결과를 받아 "회원가입 버튼" 활성화 결정
+		// 4. 비동기적 이메일 체크
+		var emailObj = $("#email");
+		
+		function joinEmailCheck() {
+			var email = $("#email").val();
+			var emailMsg = $("#email-msg");
+			
+			$.ajax({
+				type:"POST",
+				url:"/user/joinEmailCheck",
+				data:{email:email},
+				dataType:"text",
+				success:function(result) {
+					console.log(result);
+					if (result == "EMAIL_DUP") {
+						emailMsg.text("이미 사용중인 이메일입니다.");
+						emailResult = false;
+					} else if (email == "" || email == null) {
+						emailMsg.text("이메일은 필수항목입니다.");
+						emailResult = false;
+					} else if (result == "SUCCESS") {
+						emailMsg.text("");
+						emailResult = true;
+					}
+					
+					finalCheck();
+					return emailResult;
+				}
+			});
+		}
+		
+		emailObj.keyup(function() {
+			joinEmailCheck();
+			finalCheck();
+		});
+		
+		
+		// 4가지 메소드 결과를 받아 "회원가입 버튼" 활성화 결정
 		var uidResult = false;
 		var pwResult = false;
 		var nameResult = false;
+		var emailResult = false;
 		
 		var submitBtn = $("#submit-btn");
 	
 		function finalCheck() {
-			if ((uidResult == true) && (pwResult == true) && (nameResult == true)) {
+			if ((uidResult == true) && (pwResult == true) && (nameResult == true) && (emailResult == true)) {
 				submitBtn.removeAttr("disabled");
 			} else {
 				submitBtn.attr("disabled", "disabled");

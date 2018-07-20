@@ -8,6 +8,7 @@ public class UserVO {
 	private String name;
 	private String gender;
 	private String thumbnail;
+	private String email;
 	private Date joindate;
 	
 	public String getUid() {
@@ -40,6 +41,12 @@ public class UserVO {
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
 	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public Date getJoindate() {
 		return joindate;
 	}
@@ -50,6 +57,7 @@ public class UserVO {
 	@Override
 	public String toString() {
 		return "UserVO [uid=" + uid + ", pw=" + pw + ", name=" + name + ", gender=" + gender + ", thumbnail="
-				+ thumbnail + ", joindate=" + joindate + "]";
+				+ thumbnail + ", email=" + email + ", joindate=" + joindate + "]";
 	}
+
 }

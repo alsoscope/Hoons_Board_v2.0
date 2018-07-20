@@ -59,12 +59,12 @@ public class UserController {
 	// 회원가입 구현하자
 	@RequestMapping(value="join", method=RequestMethod.POST)
 	public String joinPost(UserVO uVO, Model model) throws Exception {
-		return "";
+		return "/user/joinPost";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="joinIdCheck", method=RequestMethod.POST)
-	public ResponseEntity<String> joinIdCheck(@RequestParam("uid") String uid) {
+	public ResponseEntity<String> joinIdCheck(String uid) {
 		ResponseEntity<String> entity = null;
 		
 		try {
@@ -81,4 +81,22 @@ public class UserController {
 		return entity;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="joinEmailCheck", method=RequestMethod.POST)
+	public ResponseEntity<String> joinEmailCheck(String email) {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			if (userService.readByEmail(email) != null) {
+				entity = new ResponseEntity<>("EMAIL_DUP", HttpStatus.OK);
+			} else {
+				entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 }

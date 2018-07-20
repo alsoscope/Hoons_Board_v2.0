@@ -30,6 +30,11 @@ public class UserDAOImpl implements UserDAO {
 	public UserVO readByUid(String uid) throws Exception {
 		return sqlSession.selectOne("user.readByUid", uid);
 	}
+
+	@Override
+	public UserVO readByEmail(String email) throws Exception {
+		return sqlSession.selectOne("user.readByEmail", email);
+	}
 	
 	@Override
 	public UserVO readForCheckSession(String value) throws Exception {
@@ -45,5 +50,4 @@ public class UserDAOImpl implements UserDAO {
 		
 		sqlSession.update("user.updateForLogin", map);
 	}
-	
 }
