@@ -42,12 +42,12 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public void updateForLogin(String uid, String sessionid, Date next) throws Exception {
+	public void updateForCookie(String uid, String sessionid, Date next) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("uid", uid);
 		map.put("sessionid", sessionid);
 		map.put("next", next);
 		
-		sqlSession.update("user.updateForLogin", map);
+		sqlSession.update("user.updateForCookie", map);
 	}
 }

@@ -23,7 +23,7 @@
 							<input class="form-control" type="password" id="pw" name="pw" placeholder="비밀번호">
 						</div>
 						<div class="form-group">
-							<input style="margin-right: 5px" type="checkbox" name="useCookie">로그인 유지
+							<input style="margin-right: 5px" type="checkbox" name="usecookie">로그인 유지
 							<input type="hidden" name="uri" value="${param.uri }">
 						</div>
 						<div class="form-group">

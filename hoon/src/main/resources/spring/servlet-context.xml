@@ -29,25 +29,21 @@
 		<beans:property name="maxUploadSize" value="10485760"></beans:property>
 	</beans:bean>
 	
-	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="c:\\file\\upload"></beans:constructor-arg>
-	</beans:bean>
-	
 	<!-- 인터셉터 -->
-	<beans:bean id="loginInterceptor" class="kr.pe.hoon.interceptor.LoginInterceptor"></beans:bean>
 	<beans:bean id="authInterceptor" class="kr.pe.hoon.interceptor.AuthInterceptor"></beans:bean>
-	
-	<interceptors>
-		<interceptor>
-			<mapping path="/user/loginPost"/>
-			<beans:ref bean="loginInterceptor"/>
-		</interceptor>
-	</interceptors>
+	<beans:bean id="loginInterceptor" class="kr.pe.hoon.interceptor.LoginInterceptor"></beans:bean>
 	
 	<interceptors>
 		<interceptor>
 			<mapping path="/boards/new"/>
 			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/user/loginPost"/>
+			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

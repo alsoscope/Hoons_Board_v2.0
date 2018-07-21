@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where sessionkey = #{value} and sessionlimit > now()
 	</select>
 	
-	<update id="updateForLogin">
+	<update id="updateForCookie">
 		update tbl_user
 		set sessionkey = #{sessionid}, sessionlimit = #{next}
 		where uid = #{uid}

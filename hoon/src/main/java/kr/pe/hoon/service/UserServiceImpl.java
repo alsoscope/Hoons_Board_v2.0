@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateForLogin(String uid, String sessionid, Date next) throws Exception {
-		uDAO.updateForLogin(uid, sessionid, next);
+	public void updateForCookie(String uid, String sessionid, Date next) throws Exception {
+		uDAO.updateForCookie(uid, sessionid, next);
 	}
 
 }

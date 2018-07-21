@@ -85,13 +85,16 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">메뉴 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<c:set var="uri"></c:set>
+							<c:if test="${login.uid == null }">
 							<li><a href="/user/login"><i class="fa fa-sign-in"></i> 로그인</a></li>
 							<li><a href="/user/join"><i class="fa fa-user"></i> 회원가입</a></li>
-							<li><a href="#"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
+							</c:if>
+							<c:if test="${login.uid != null }">
+							<li><a href="/user/logout"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
 							<li><a href="#"><i class="fa fa-user"></i> 내 정보</a></li>
 							<li class="divider"></li>
 							<li><a href="#"><i class="fa fa-trash-o"></i> 회원탈퇴</a></li>
+							</c:if>
 						</ul>
 					</li>
 				</ul>
