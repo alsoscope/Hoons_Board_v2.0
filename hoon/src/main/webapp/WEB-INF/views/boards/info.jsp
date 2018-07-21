@@ -44,7 +44,7 @@
 						<th rowspan="2">작성자</th>
 						<td rowspan="2">
 							<a href="#">
-<!-- 								<img class="media-object" src="..." alt="IMG"> -->
+								<img class="media-object" src="..." alt="IMG">
 							</a>
 						</td>
 						<td>${bVO.writer }</td>

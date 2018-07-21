@@ -47,7 +47,6 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/boards/new"/>
-			<mapping path="/boards/edit"/>
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>

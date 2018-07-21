@@ -69,11 +69,12 @@
 							<i class="fa fa-eye"></i> ${bVO.viewcnt }
 						</td>
 						<td rowspan="2">					
-						<div class="media-left">
-						<a href="#">
-							<img class="media-object" src="..." alt="IMG">
-						</a>
-					</div></td>
+							<div class="media-left">
+								<a href="#">
+									<img class="media-object" src="..." alt="IMG">
+								</a>
+							</div>
+						</td>
 						<td width="200px">${bVO.writer }</td>
 					</tr>
 					<tr>
