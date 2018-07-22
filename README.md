@@ -123,7 +123,7 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
         tbl_user 테이블을 조회하여 아이디, 이메일 중복 결과를 text 데이터 타입으로 리턴
       </li>
       <li>비밀번호 4자리 이상 + 비밀번호 재입력 일치 시 -&raquo; 비밀번호 체크 표시 활성화</li>
-      <li>입력된 name 값이 체크</li>
+      <li>입력된 name 값 null 체크</li>
       <li>---> jQeury .keyup() 메소드를 사용, 매 입력시 위 세가지 모두 충족해야만 submit 버튼 활성화</li>
       <ul>
        <li>네이버로 로그인 하기 기능 구현중...</li>
