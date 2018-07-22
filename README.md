@@ -42,9 +42,9 @@ create database study;
 
 use study;
 
-<ul>
-  <li>tbl_board</li>
-</ul>
+
+<p>tbl_board<p>
+
 CREATE TABLE tbl_board (
   bno int(11) NOT NULL AUTO_INCREMENT,
   title varchar(50) DEFAULT NULL,
@@ -57,8 +57,9 @@ CREATE TABLE tbl_board (
     PRIMARY KEY (bno)
 );
 
+
 <ul>
-  <li>tbl_reply</li>
+  <li><b>tbl_reply</b></li>
 </ul>
 CREATE TABLE tbl_reply (
   rno int(11) NOT NULL AUTO_INCREMENT,
@@ -69,6 +70,7 @@ CREATE TABLE tbl_reply (
   updatedate timestamp NOT NULL DEFAULT current_timestamp(),
     PRIMARY KEY (rno)
 );
+
 
 <ul>
   <li>tbl_attach</li>
@@ -95,7 +97,6 @@ CREATE TABLE tbl_user (
   joindate timestamp NOT NULL DEFAULT current_timestamp(),
     PRIMARY KEY (uid)
 );
-
 
 alter table tbl_reply add foreign key(rno) references tbl_board(bno);
 alter table tbl_reply add foreign key(bno) references tbl_board(bno);
