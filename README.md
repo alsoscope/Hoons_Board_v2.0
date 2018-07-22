@@ -105,4 +105,4 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
 
 < ERD >
 
-<img src="https://user-images.githubusercontent.com/38021616/43047553-c7078ab6-8e13-11e8-934c-449e41e32d68.JPG">
+<img src="https://user-images.githubusercontent.com/38021616/43047553-c7078ab6-8e13-11e8-934c-449e41e32d68.JPG" width="700px;">
