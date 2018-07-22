@@ -1,4 +1,6 @@
-## [Hoon's Board v2.0] RESTful CRUD 게시판 구현
+# [Hoon's Board v2.0] CRUD 게시판 구현
+
+<br>
 
 < Used Language, Library >
 
@@ -25,9 +27,13 @@
 < Tool Kit >
 
 <ul>
-    <li>EClipse Oxygen.3a, JDK 1.8.0</li>
+    <li>EClipse Oxygen, JDK 1.8.0</li>
     <li>Spring 3.2.2 STS</li>
     <li>Apache-Tomcat 9.0(WAS)</li>
     <li>Mysql(DB)</li>
     <li>Github(SVN)</li>
 </ul>
+
+<hr>
+
+< Mysql DB 구축 >
