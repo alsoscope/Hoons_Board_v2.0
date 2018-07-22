@@ -109,12 +109,19 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
 
 <hr>
 
+< URL >
+
+<hr>
+
 < Function >
 
 <ol>
   <b><li>회원가입</li></b>
     <ul>
-      <li>Java</li>
+      <li>
+        jquery ajax를 이용해, 입력된 uid, email 값을 파라미터로 하여 컨트롤러에 전달, 
+        tbl_user 테이블을 조회하여 아이디, 이메일 중복 결과를 text 데이터 타입으로 리턴
+      </li>
       <li>JSP</li>
       <li>HTML, CSS</li>
       <li>Java Script</li>
