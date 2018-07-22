@@ -38,6 +38,7 @@
 
 < Mysql DB 구축 >
 
+<p><b> - database</b><p>
 create database study;
 
 use study;
@@ -93,6 +94,8 @@ CREATE TABLE tbl_user (
   joindate timestamp NOT NULL DEFAULT current_timestamp(),
     PRIMARY KEY (uid)
 );
+
+<p><b> - foreign key</b></p>
 
 alter table tbl_reply add foreign key(rno) references tbl_board(bno);
 
