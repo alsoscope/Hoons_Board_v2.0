@@ -95,6 +95,7 @@ CREATE TABLE tbl_user (
 );
 
 alter table tbl_reply add foreign key(rno) references tbl_board(bno);
+
 alter table tbl_reply add foreign key(bno) references tbl_board(bno);
 
 <hr>
