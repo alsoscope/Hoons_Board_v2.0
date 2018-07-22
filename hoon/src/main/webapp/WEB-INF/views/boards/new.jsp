@@ -30,15 +30,12 @@
 						</div>
 					</div>
 				</fieldset>
-				
 				<hr color="gray">
-				
 				<div class="form-group" style="margin-top: 30px">
 					<label>아래 영역에 첨부하실 파일을 올려주세요.</label>
 					<div class="fileDrop">
 					</div>
 				</div>
-				
 				<div class="box-footer" style="background: #f8f8f8">
 					<div>
 						<hr color="gray">
@@ -47,7 +44,6 @@
 					<ul class="mailbox-attachments clearfix uploadedList">
 					</ul>
 				</div>
-				
 				<div class="nav" role="navigation">
 					<fieldset class="buttons">
 						<a href="/boards" class="btn btn-default btn-wide" onclick="return confirm('정말로 취소하시겠습니까?')">취소</a> 

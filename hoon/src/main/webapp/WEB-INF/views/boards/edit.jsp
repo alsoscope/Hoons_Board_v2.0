@@ -5,7 +5,8 @@
 	<div class="container" style="max-width: 70%;">
 		<div class="panel-body">
 			<h2>수정하기</h2>
-			<form action="/boards/edit/${bVO.bno }" method="post" id="edit-form" class="create-form">
+			<form action="/boards/${bVO.bno }" method="post" id="edit-form" class="create-form">
+				<input type="hidden" name="_method" value="PUT">
 				<fieldset class="form">
 					<div class="form-group  has-feedback">
 						<div class="form-group">
@@ -15,27 +16,21 @@
 							<textarea class="form-control" name="content" style="height: 200px; resize: none">${bVO.title }</textarea>
 						</div>
 					</div>
-					
 					<hr color="gray">
-				
 					<div class="form-group" style="margin-top: 30px">
 						<label>아래 영역에 첨부하실 파일을 올려주세요.</label>
 						<div class="fileDrop">
 						</div>
 					</div>
-
 					<ul class="mailbox-attachments clearfix uploadedList">
 					</ul>
-					
 					<div class="popup back" style="display: none;">
 						<div id="popup_front" class="popup front" style="display: none;"></div>
 						<img id="popup_img">
 					</div>
-	
 					<div>
 						<hr color="gray">
 					</div>
-				
 					<div class="nav" role="navigation">
 						<fieldset class="buttons">
 							<a href="/boards" class="btn btn-default btn-wide" onclick="return confirm('정말로 취소하시겠습니까?')">취소</a> 

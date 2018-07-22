@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.pe.hoon.domain.BoardVO;
 import kr.pe.hoon.domain.Criteria;
 import kr.pe.hoon.domain.PageMaker;
+import kr.pe.hoon.domain.ReplyVO;
 import kr.pe.hoon.domain.SearchCriteria;
 import kr.pe.hoon.service.BoardService;
 import kr.pe.hoon.service.ReplyService;
@@ -47,7 +49,7 @@ public class BoardController {
 	@Autowired
 	private ReplyService replyService;
 	
-	// Board 관련
+	// tbl_board 관련
 	@RequestMapping(value="new", method=RequestMethod.GET)
 	public String createGET() throws Exception {
 		
@@ -91,7 +93,7 @@ public class BoardController {
 		return "boards/edit";
 	}
 	
-	@RequestMapping(value="edit/{bno}", method=RequestMethod.POST)
+	@RequestMapping(value="{bno}", method=RequestMethod.PUT)
 	public String updatePOST(@ModelAttribute BoardVO bVO) throws Exception {
 		boardService.update(bVO);
 		
@@ -105,7 +107,7 @@ public class BoardController {
 		return "redirect:/boards";
 	}
 	
-	// Reply 관련
+	// tbl_reply 관련 ////////////////////////////////////////////////////////////////
 	@ResponseBody
 	@RequestMapping(value="{bno}/replies", method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> readAllReplies(@PathVariable int bno, int page) {
@@ -135,8 +137,58 @@ public class BoardController {
 		return entity;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="{bno}/replies/new", method=RequestMethod.POST)
+	public ResponseEntity<String> create(@PathVariable int bno, @RequestBody ReplyVO rVO) {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			rVO.setBno(bno);
+			replyService.create(rVO);
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
 	
-	// Attach 관련
+	@ResponseBody
+	@RequestMapping(value="{bno}/replies/{rno}", method=RequestMethod.PUT)
+	public ResponseEntity<String> update(@PathVariable int bno, @PathVariable int rno, @RequestBody ReplyVO rVO) {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			rVO.setBno(bno);
+			rVO.setRno(rno);
+			replyService.update(rVO);
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="{bno}/replies/{rno}", method=RequestMethod.DELETE)
+	public ResponseEntity<String> delete(@PathVariable int bno, @PathVariable int rno) {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			replyService.delete(rno, bno);
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+	
+	// rbl_attach 관련 ////////////////////////////////////////////////////////////////
 	@ResponseBody
 	@RequestMapping("{bno}/attaches")
 	public List<String> readAllAttaches(@PathVariable int bno) throws Exception {

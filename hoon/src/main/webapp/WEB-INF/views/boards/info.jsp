@@ -34,7 +34,6 @@
 						</div>
 					</div>
 				</div>
-				
 				<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 					<tr>
 						<th>제목</th>
@@ -227,19 +226,17 @@
 		
 			$.ajax({
 				type:"POST",
-				url:"/replies/new",
+				url:"/boards/" + bno + "/replies/new",
 				headers:{
 					"Content-Type":"application/json",
 					"X-HTTP-Method-Override":"POST"
 				},
 				data:JSON.stringify({
-					bno:bno,
 					replytext:replytext,
 					replywriter:replywriter
 				}),
 				dataType:"text",
 				success:function() {
-					alert("등록되었습니다.");
 					$("#replytext").val("");
 					getReplyList(1); 
 				}
@@ -313,7 +310,7 @@
 				
 				$.ajax({
 					type:"DELETE",
-					url:"/replies/" + rno + "?bno=" + bno,
+					url:"/boards/" + bno + "/replies/" + rno,
 					headers:{
 						"Content-Type":"application/json",
 						"X-HTTP-Method-Override":"DELETE"
@@ -321,7 +318,6 @@
 					dataType:"text",
 					success:function(result) {
 						if(result == "SUCCESS") {
-							alert("삭제되었습니다.");
 							$("#replyModal").modal("hide");
 							getReplyList(1);
 						}
@@ -333,11 +329,14 @@
 		$("#reply-edit-btn").click(function() {
 			var rno = $(".list-group-item").attr("data-rno");
 			var replytext = $("#replytext-modal").val();
+			var bno = "${bVO.bno}";
 			
 			$.ajax({
 				type:"PUT",
-				url:"/replies/" + rno,
-				data:JSON.stringify({replytext:replytext}),
+				url:"/boards/" + bno + "/replies/" + rno,
+				data:JSON.stringify({
+					replytext:replytext
+				}),
 				headers:{
 					"Content-Type":"application/json",
 					"X-HTTP-Method-Override":"PUT"
@@ -345,7 +344,6 @@
 				dataType:"text",
 				success:function(result) {
 					if(result == "SUCCESS") {
-						alert("수정되었습니다.");
 						$("#replyModal").modal("hide");
 						getReplyList(1);
 					}
