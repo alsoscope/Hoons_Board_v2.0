@@ -119,11 +119,13 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
   <b><li>회원가입</li></b>
     <ul>
       <li>
-        jquery ajax를 이용해, 입력된 uid, email 값을 파라미터로 하여 컨트롤러에 전달, 
+        Ajax를 이용해 입력된 uid, email 값을 파라미터로 하여 컨트롤러에 전달 -&raquo; 
         tbl_user 테이블을 조회하여 아이디, 이메일 중복 결과를 text 데이터 타입으로 리턴
       </li>
-      <li>JSP</li>
-      <li>HTML, CSS</li>
-      <li>Java Script</li>
+      <li>비밀번호 4자리 이상 + 비밀번호 재입력 일치 시 -&raquo; 비밀번호 체크 표시 활성화</li>
+      <li>입력된 name 값이 체크</li>
+      <li>===&raquo; 위 세가지 모두 충족해야만 submit 버튼 활성화</li>
+      <li>네이버로 로그인 하기 기능 구현중...</li>
+      <li>이메일 인증 기능 구현중...</li>
     </ul>
 </ol>
