@@ -16,5 +16,7 @@ public interface UserDAO {
 	
 	public UserVO readForCheckSession(String value) throws Exception;
 	
+	public void update(UserVO uVO) throws Exception;
+	
 	public void updateForCookie(String uid, String sessionid, Date next) throws Exception;
 }

@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
@@ -76,7 +75,7 @@ public class UserController {
 			}
 		}
 		
-		return "redirect:/boards";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="join", method=RequestMethod.GET)
@@ -91,6 +90,29 @@ public class UserController {
 		userService.create(uVO);
 		
 		return "/user/joinPost";
+	}
+	
+	@RequestMapping(value="info", method=RequestMethod.GET)
+	public String info(HttpServletRequest request, Model model) throws Exception {
+		HttpSession session = request.getSession();
+		String uid = ((UserVO) session.getAttribute("login")).getUid();
+		
+		UserVO uVO = userService.readByUid(uid);
+				
+		userService.update(uVO);
+		
+		logger.info("user info: " + uVO.toString());
+		model.addAttribute("uVO", uVO);
+		
+		return "/user/info";
+	}
+	
+	@RequestMapping(value="edit", method=RequestMethod.POST)
+	public String edit(@ModelAttribute("uVO") UserVO uVO) throws Exception {
+		userService.update(uVO);
+		logger.info("update user info: " + uVO.toString());
+		
+		return "redirect:/user/info";
 	}
 	
 	// 회원가입  관련 ajax 처리(중복 uid, email 체크)

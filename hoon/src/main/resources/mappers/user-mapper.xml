@@ -16,13 +16,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="readByUid" resultType="UserVO">
-		select uid
+		select *
 		from tbl_user
 		where uid = #{uid}
 	</select>
 	
 	<select id="readByEmail" resultType="UserVO">
-		select email
+		select *
 		from tbl_user
 		where email = #{email}
 	</select>
@@ -32,6 +32,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from tbl_user
 		where sessionkey = #{value} and sessionlimit > now()
 	</select>
+
+	<update id="update">
+		update tbl_user
+		set name = #{name}, email = #{email}
+		where uid = #{uid}
+	</update>
 	
 	<update id="updateForCookie">
 		update tbl_user

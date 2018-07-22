@@ -42,6 +42,11 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
+	public void update(UserVO uVO) throws Exception {
+		sqlSession.update("user.update", uVO);
+	}
+	
+	@Override
 	public void updateForCookie(String uid, String sessionid, Date next) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("uid", uid);
@@ -50,4 +55,5 @@ public class UserDAOImpl implements UserDAO {
 		
 		sqlSession.update("user.updateForCookie", map);
 	}
+
 }
