@@ -42,8 +42,7 @@ create database study;
 
 use study;
 
-
-<p>tbl_board<p>
+<p><b> - tbl_board</b><p>
 
 CREATE TABLE tbl_board (
   bno int(11) NOT NULL AUTO_INCREMENT,
@@ -58,9 +57,8 @@ CREATE TABLE tbl_board (
 );
 
 
-<ul>
-  <li><b>tbl_reply</b></li>
-</ul>
+<p><b> - tbl_reply</b><p>
+  
 CREATE TABLE tbl_reply (
   rno int(11) NOT NULL AUTO_INCREMENT,
   bno int(11) NOT NULL,
@@ -72,9 +70,8 @@ CREATE TABLE tbl_reply (
 );
 
 
-<ul>
-  <li>tbl_attach</li>
-</ul>
+<p><b> - tbl_attach</b><p>
+  
 CREATE TABLE tbl_attach (
   fullName varchar(150) NOT NULL,
   bno int(11) NOT NULL,
@@ -82,9 +79,8 @@ CREATE TABLE tbl_attach (
     PRIMARY KEY (fullName)
 );
 
-<ul>
-  <li>tbl_user</li>
-</ul>
+<p><b> - tbl_user</b><p>
+  
 CREATE TABLE tbl_user (
   uid varchar(50) NOT NULL,
   pw varchar(50) DEFAULT NULL,
