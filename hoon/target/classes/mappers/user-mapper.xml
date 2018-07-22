@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="user">
 	<insert id="create">
-		insert into tbl_user(uid, pw, name, gender, joindate)
-		values (#{uid}, #{pw}, #{name}, #{gender}, #{joindate})
+		insert into tbl_user(uid, pw, name, gender, email)
+		values (#{uid}, #{pw}, #{name}, #{gender}, #{email})
 	</insert>
 
 	<select id="read" resultType="UserVO">

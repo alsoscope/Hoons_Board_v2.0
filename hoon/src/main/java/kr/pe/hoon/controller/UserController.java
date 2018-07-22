@@ -7,11 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,13 +28,13 @@ import kr.pe.hoon.service.UserService;
 @Controller
 @RequestMapping("user")
 public class UserController {
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	
 	@Autowired
 	private UserService userService;
 	
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String loginGET(HttpServletRequest request) {
-		String referer = request.getHeader("Referer");
-		request.getSession().setAttribute("redirectURI", referer);
 		
 		return "/user/login";
 	}
@@ -73,20 +76,24 @@ public class UserController {
 			}
 		}
 		
-			return "redirect:/boards";
+		return "redirect:/boards";
 	}
 	
 	@RequestMapping(value="join", method=RequestMethod.GET)
 	public String joinGET() {
+		
 		return "/user/join";
 	}
 	
-	/////////////////////////////////
-	@RequestMapping(value="joinPOST", method=RequestMethod.POST)
-	public String joinPost(UserVO uVO, Model model) throws Exception {
+	@RequestMapping(value="joinPost", method=RequestMethod.POST)
+	public String joinPost(@ModelAttribute("uVO") UserVO uVO) throws Exception {
+		logger.info("currnent join member: " + uVO.toString());
+		userService.create(uVO);
+		
 		return "/user/joinPost";
 	}
 	
+	// 회원가입  관련 ajax 처리(중복 uid, email 체크)
 	@ResponseBody
 	@RequestMapping(value="joinIdCheck", method=RequestMethod.POST)
 	public ResponseEntity<String> joinIdCheck(String uid) {

@@ -11,7 +11,7 @@
 						<c:if test="${param.login_error == 1 }">
 						<div class="alert alert-warning" role="alert">
 	                        <ul>
-	                            <li><font color="red">아이디 또는 비밀번호가 올바르지 않습니다.</font></li>
+	                            <li><font color="red">아이디 또는 비밀번호 오류</font></li>
 	                        </ul>
                     	</div>
                     	</c:if>

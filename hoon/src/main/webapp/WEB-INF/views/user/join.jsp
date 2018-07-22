@@ -7,7 +7,7 @@
 		<div class="col-lg-4"></div>
 			<div class="col-lg-4">
 				<div class="jumbotron" style="padding-top: 20px;" align="center">
-					<form action="/user/join" method="post">
+					<form action="/user/joinPost" method="post">
 						<h3>회원가입</h3>
 						<div class="form-group">
 							<input class="form-control" type="text" id="uid" name="uid" placeholder="아이디" autocomplete="off">
@@ -16,7 +16,7 @@
 							<span id="id-msg" style="color: red"></span>
 						</div>	
 						<div class="form-group">
-							<input class="form-control" type="password" id="pw" name="pw" placeholder="비밀번호">
+							<input class="form-control" type="password" id="pw" name="pw" placeholder="비밀번호 (4자리 이상)">
 						</div>
 						<div class="form-group">
 							<input class="form-control" type="password" id="pwck" name="pwck" placeholder="비밀번호 확인">

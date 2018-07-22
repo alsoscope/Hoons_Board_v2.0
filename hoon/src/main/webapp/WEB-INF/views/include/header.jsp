@@ -82,6 +82,16 @@
 					<li style="padding: 10px">
 						<h5 style="color: white;">
 					</li>
+					<li style="padding: 10px">
+							<h5 style="color: white;">
+							<c:if test="${login.uid == null }">
+								GUEST님 반갑습니다.
+							</c:if>
+							<c:if test="${login.uid != null }">
+								${login.uid }님 반갑습니다.
+							</c:if>
+							</h5>
+					</li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">메뉴 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
@@ -90,7 +100,7 @@
 							<li><a href="/user/join"><i class="fa fa-user"></i> 회원가입</a></li>
 							</c:if>
 							<c:if test="${login.uid != null }">
-							<li><a href="/user/logout"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
+							<li><a href="/user/logout" onclick="return confirm('로그아웃 하시겠습니까?');"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
 							<li><a href="#"><i class="fa fa-user"></i> 내 정보</a></li>
 							<li class="divider"></li>
 							<li><a href="#"><i class="fa fa-trash-o"></i> 회원탈퇴</a></li>
