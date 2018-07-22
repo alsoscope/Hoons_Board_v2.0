@@ -8,7 +8,7 @@
       <li>Java</li>
       <li>JSP</li>
       <li>HTML, CSS</li>
-      <li>JavaScript</li>
+      <li>Java Script</li>
     </ul>
 </ul>
 <ul>
@@ -20,3 +20,14 @@
     </ul>
 </ul>
 
+<hr>
+
+< Tool Kit >
+
+<ul>
+    <li>EClipse Oxygen.3a, JDK 1.8.0</li>
+    <li>Spring 3.2.2 STS</li>
+    <li>Apache-Tomcat 9.0(WAS)</li>
+    <li>Mysql(DB)</li>
+    <li>Github(SVN)</li>
+</ul>
