@@ -106,3 +106,17 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
 < ERD >
 
 <img src="https://user-images.githubusercontent.com/38021616/43047553-c7078ab6-8e13-11e8-934c-449e41e32d68.JPG" width="700px;">
+
+<hr>
+
+< Function >
+
+<ol>
+  <b><li>회원가입</li></b>
+    <ul>
+      <li>Java</li>
+      <li>JSP</li>
+      <li>HTML, CSS</li>
+      <li>Java Script</li>
+    </ul>
+</ol>
