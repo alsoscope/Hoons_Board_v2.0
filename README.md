@@ -151,6 +151,7 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
     <ol>
       <b><li>파일 첨부</li></b>
     </ol>
+    <ul>
       <li>이미지, 일반 파일을 구분하여 처리</li>
       <li>Drop 영역에 파일을 올리면 해당 파일의 이름을 Java script의 FormData 객체에 담아 컨트롤러에 요청 -> 실제 서버의 정해진 경로에 파일 저장, 화면에 목록으로 출력</li>
       <li>각 파일마다 표시된 'x' 클릭시 위에서 실제 저장된 파일 삭제</li>
@@ -158,6 +159,7 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
       <ul>
         <li>사용자 썸네일 이미지 관련 처리 구현중...</li>
       </ul>
+    </ul>
   </ul>
   
   
