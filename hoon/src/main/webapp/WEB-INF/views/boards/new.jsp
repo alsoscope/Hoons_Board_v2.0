@@ -79,7 +79,6 @@
 		$(".fileDrop").on("drop", function(event) {
 			event.preventDefault();
 			
-			var bno = "${bVO.bno}";
 			var files = event.originalEvent.dataTransfer.files;
 			var file = files[0];
 			
@@ -88,7 +87,7 @@
 			
 			$.ajax({
 				type:"POST",
-				url:"/boards/" + bno + "/uploadFile",
+				url:"/boards/new/uploadFile",
 				data:formData,
 				processData:false,
 				contentType:false,

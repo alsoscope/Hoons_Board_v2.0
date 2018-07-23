@@ -107,7 +107,7 @@ public class BoardController {
 		return "redirect:/boards";
 	}
 	
-	// tbl_reply 관련 ////////////////////////////////////////////////////////////////
+	// tbl_reply 관련 -----------------------------------------------------------------
 	@ResponseBody
 	@RequestMapping(value="{bno}/replies", method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> readAllReplies(@PathVariable int bno, int page) {
@@ -188,7 +188,7 @@ public class BoardController {
 		return entity;
 	}
 	
-	// rbl_attach 관련 ////////////////////////////////////////////////////////////////
+	// rbl_attach 관련 -----------------------------------------------------------------
 	@ResponseBody
 	@RequestMapping("{bno}/attaches")
 	public List<String> readAllAttaches(@PathVariable int bno) throws Exception {
@@ -198,8 +198,16 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="{bno}/uploadFile", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
+	@RequestMapping(value="new/uploadFile", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
 	public ResponseEntity<String> uploadFile(MultipartFile file) throws Exception {
+		logger.info("originalName: " + file.getOriginalFilename());
+		
+		return new ResponseEntity<>(UploadFileUtils.uploadFiles(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="{bno}/uploadFile", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
+	public ResponseEntity<String> uploadFileForUpdate(MultipartFile file) throws Exception {
 		logger.info("originalName: " + file.getOriginalFilename());
 		
 		return new ResponseEntity<>(UploadFileUtils.uploadFiles(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
