@@ -127,9 +127,7 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
     <li>비밀번호 4자리 이상 + 비밀번호 재입력 일치 시 -&raquo; 비밀번호 체크 표시 활성화</li>
     <li>입력된 name 값 null 체크</li>
     <li>---> jQeury .keyup() 메소드를 사용, 매 입력시 위 세가지 모두 충족해야만 submit 버튼 활성화</li>
-    <ul>
-     <li>(이메일 인증 기능 구현중...)</li>
-    </ul>
+    <li>임시 회원가입 이후, 인증용 메일 수신(임의의 authkey정보 포함) -> 이메일 인증 + 사용자 권한 활성화</li>
    </ul>
   
   <b><li>로그인</li></b>
