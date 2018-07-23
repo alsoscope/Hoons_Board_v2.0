@@ -128,7 +128,7 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
     <li>입력된 name 값 null 체크</li>
     <li>---> jQeury .keyup() 메소드를 사용, 매 입력시 위 세가지 모두 충족해야만 submit 버튼 활성화</li>
     <ul>
-     <li>이메일 인증 기능 구현중...</li>
+     <li>(이메일 인증 기능 구현중...)</li>
     </ul>
    </ul>
   
@@ -140,7 +140,7 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
     <li>'로그인 유지' 선택에 따른 쿠키 관리 -> 자동 로그인 구현</li>
     <li>세션을 이용한 로그인 상태 유지</li>
     <ul>
-      <li>네이버로 로그인 하기 기능 구현중...</li>
+      <li>(네이버로 로그인 하기 기능 구현중...)</li>
     </ul>
   </ul>
   
@@ -156,7 +156,7 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
           </li>
           <li>Bootstrap Modal 기능을 이용, 페이지 이동없이 댓글 관리 가능</li>
           <ul>
-            <li>좋아요 기능 구현중...</li>
+            <li>(좋아요 기능 구현중...)</li>
           </ul>
         </ul>
       <b><li>파일 첨부</li></b>
@@ -171,7 +171,7 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
           -> 해당 bno를 가진 tbl_attach 레코드 삭제, 종속된 파일 일괄 삭제
         </li>
         <ul>
-          <li>사용자 썸네일 이미지 관련 처리 구현중...</li>
+          <li>(사용자 썸네일 이미지 관련 처리 구현중...)</li>
         </ul>
       </ul>
     </ol>
