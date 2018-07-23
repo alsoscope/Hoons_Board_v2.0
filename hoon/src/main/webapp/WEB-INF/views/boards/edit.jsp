@@ -127,6 +127,7 @@
 			event.preventDefault();
 			
 			var that = $(this);
+			var bno = "${bVO.bno}";
 			var str = "";
 			
 			$(".uploadedList .del-btn").each(function (index) {
@@ -136,7 +137,7 @@
 			if (deleteFiles.length > 0) {
 				$.ajax({
 					type:"POST",
-					url:"/boards/deleteAllFiles",
+					url:"/boards/" + bno + "/deleteAllFiles",
 					data:{files:deleteFiles}
 				});
 			}

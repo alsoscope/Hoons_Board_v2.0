@@ -85,7 +85,7 @@ public class BoardController {
 		return "boards/list";
 	}
 	
-	@RequestMapping(value="edit/{bno}", method=RequestMethod.GET)
+	@RequestMapping(value="{bno}/edit", method=RequestMethod.GET)
 	public String updateGET(@PathVariable int bno, Model model) throws Exception {
 		logger.info(boardService.readNoViewcnt(bno).toString());
 		model.addAttribute("bVO", boardService.readNoViewcnt(bno));
@@ -206,7 +206,7 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("displayFile")
+	@RequestMapping("{bno}/displayFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
 		InputStream in = null;
 		ResponseEntity<byte[]> entity = null;
@@ -240,7 +240,7 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="deleteFile", method=RequestMethod.POST)
+	@RequestMapping(value="{bno}/deleteFile", method=RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName) {
 		logger.info("delete file: " + fileName);
 		String formatName = fileName.substring(fileName.indexOf(".") + 1);
@@ -259,7 +259,7 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="deleteAllFiles", method=RequestMethod.POST)
+	@RequestMapping(value="{bno}/deleteAllFiles", method=RequestMethod.POST)
 	public ResponseEntity<String> deleteAllFiles(@RequestParam("files[]") String[] files) {
 		logger.info("delete all files: " + files);
 		

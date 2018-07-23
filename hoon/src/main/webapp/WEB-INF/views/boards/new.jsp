@@ -119,10 +119,11 @@
 			event.preventDefault();
 			
 			var that = $(this);
+			var bno = "${bVO.bno}";
 			
 			$.ajax({
 				type:"POST",
-				url:"/boards/deleteFile",
+				url:"/boards/" + bno + "deleteFile",
 				data:{fileName:that.attr("href")},
 				dataType:"text",
 				success:function(result) {

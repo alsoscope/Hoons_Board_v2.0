@@ -65,7 +65,7 @@
 				</a>
 				<ul class="dropdown-menu" role="menu">
 					<li>
-						<a href="/boards/edit/${bVO.bno }" class="edit">
+						<a href="/boards/${bVO.bno }/edit" class="edit">
 							<i class="fa fa-edit fa-fw"></i> 수정
 						</a>
 					</li>
@@ -386,6 +386,8 @@
 	<!-- Board 관련 -->
 	<script>
 		$("#del-btn").click(function(event) {
+			var bno = "${bVO.bno}";
+			
 			if (confirm("정말로 삭제하시겠습니까?")) {
 				var replycnt = $(".replycnt").html().replace(/[^0-9]/g, "");
 				
@@ -406,7 +408,7 @@
 					if (files.length > 0) {
 						$.ajax({
 							type:"POST",
-							url:"/boards/deleteAllFiles",
+							url:"/boards/" + bno + "/deleteAllFiles",
 							data:{files:files}
 						});
 					}
