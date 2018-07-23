@@ -147,12 +147,8 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
     <ol>
       <b><li>기본 기능</li></b>
         <ul>
-          <li>ddddd</li>
+          <li>글쓰기, 글수정, 글삭제, 글내용 보기 구현</li>
         </ul>
-      <b><li>파일 첨부</li></b>
-    </ol>
-    <li>글쓰기, 글수정, 글삭제, 글내용 보기 구현</li>
-    <ol>
       <b><li>파일 첨부</li></b>
       <ul>
         <li>이미지, 일반 파일을 구분하여 처리</li>
