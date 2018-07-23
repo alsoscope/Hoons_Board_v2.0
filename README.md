@@ -119,40 +119,40 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
 
 <ol>
   <b><li>회원가입</li></b>
+  <ul>
+    <li>
+      Ajax를 이용해 입력된 uid, email 값을 파라미터로 하여 컨트롤러에 전달 -&raquo; 
+      tbl_user 테이블을 조회하여 아이디, 이메일 중복 결과를 text 데이터 타입으로 리턴
+    </li>
+    <li>비밀번호 4자리 이상 + 비밀번호 재입력 일치 시 -&raquo; 비밀번호 체크 표시 활성화</li>
+    <li>입력된 name 값 null 체크</li>
+    <li>---> jQeury .keyup() 메소드를 사용, 매 입력시 위 세가지 모두 충족해야만 submit 버튼 활성화</li>
     <ul>
-      <li>
-        Ajax를 이용해 입력된 uid, email 값을 파라미터로 하여 컨트롤러에 전달 -&raquo; 
-        tbl_user 테이블을 조회하여 아이디, 이메일 중복 결과를 text 데이터 타입으로 리턴
-      </li>
-      <li>비밀번호 4자리 이상 + 비밀번호 재입력 일치 시 -&raquo; 비밀번호 체크 표시 활성화</li>
-      <li>입력된 name 값 null 체크</li>
-      <li>---> jQeury .keyup() 메소드를 사용, 매 입력시 위 세가지 모두 충족해야만 submit 버튼 활성화</li>
-      <ul>
-       <li>이메일 인증 기능 구현중...</li>
-      </ul>
+     <li>이메일 인증 기능 구현중...</li>
     </ul>
-</ol>
-
-<ol>
+   </ul>
+  
   <b><li>로그인</li></b>
+  <ul>
+    <li>Interceptor를 이용해 </li>
+    <li>입력된 uid, pw 값을 파라미터로 하여 컨트롤러에 전달, 해당 사용자가 존재하는지 확인</li>
     <ul>
-      <li>Interceptor를 이용해 </li>
-      <li>입력된 uid, pw 값을 파라미터로 하여 컨트롤러에 전달, 해당 사용자가 존재하는지 확인</li>
-      <ul>
-        <li>네이버로 로그인 하기 기능 구현중...</li>
-      </ul>
+      <li>네이버로 로그인 하기 기능 구현중...</li>
     </ul>
+  </ul>
+  
+  <b><li>파일 첨부</li></b>
+  <ul>
+    <li>이미지, 일반 파일을 구분하여 처리</li>
+    <li>Drop 영역에 파일을 올리면 해당 파일의 이름을 Java script의 FormData 객체에 담아 컨트롤러에 요청 -> 실제 서버의 정해진 경로에 파일 저장, 화면에 목록으로 출력</li>
+    <li>각 파일마다 표시된 'x' 클릭시 위에서 실제 저장된 파일 삭제</li>
+    <li>submit시 최종적으로 화면에 표시된 파일들의 이름을 files 배열에 담아 컨트롤러에 요청 -> tbl_attach에 데이터 저장</li>
+    <ul>
+      <li>사용자 썸네일 이미지 관련 처리 구현중...</li>
+    </ul>
+  </ul>
 </ol>
 
-<ol>
-  <b><li>파일 첨부</li></b>
-    <ul>
-      <li>이미지, 일반 파일을 구분하여 처리</li>
-      <li>Drop 영역에 파일을 올리면 해당 파일의 이름을 Java script의 FormData 객체에 담아 컨트롤러에 요청 -> 실제 서버의 정해진 경로에 파일 저장, 화면에 목록으로 출력</li>
-      <li>각 파일마다 표시된 'x' 클릭시 위에서 실제 저장된 파일 삭제</li>
-      <li>submit시 최종적으로 화면에 표시된 파일들의 이름을 files 배열에 담아 컨트롤러에 요청 -> tbl_attach에 데이터 저장</li>
-      <ul>
-        <li>사용자 썸네일 이미지 관련 처리 구현중...</li>
-      </ul>
-    </ul>
-</ol>
+
+
+  
