@@ -135,8 +135,10 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
   <b><li>로그인</li></b>
   <ul>
     <li>Interceptor를 이용해</li>
-    <li>강제 로그인이 필요한 경우, 해당 요청 url을 기억해 로그인 후 해당 요청으로 이동</li>
+    <li>강제 로그인이 필요한 경우, AuthInterceptor에서 해당 요청 url을 기억해 -> 로그인 후 해당 요청으로 이동</li>
     <li>입력된 uid, pw 값을 파라미터로 하여 컨트롤러에 전달, 해당 사용자가 존재하는지 확인</li>
+    <li>'로그인 유지' 선택에 따른 쿠키 관리 -> 자동 로그인 구현</li>
+    <li>세션을 이용한 로그인 상태 유지</li>
     <ul>
       <li>네이버로 로그인 하기 기능 구현중...</li>
     </ul>
@@ -147,14 +149,27 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
     <ol>
       <b><li>기본 기능</li></b>
         <ul>
-          <li>글쓰기, 글수정, 글삭제, 글내용 보기 구현</li>
+          <li>글 쓰기, 글 수정, 글 삭제, 글 보기 구현</li>
+          <li>
+            글 보기의 경우 Ajax를 이용해 페이지 이동없이 답글 달기 가능, 
+            그 후, 페이지 이동 없이 해당 게시글 정보(댓글 목록, 댓글수 등) 최신화
+          </li>
+          <li>Bootstrap Modal 기능을 이용, 페이지 이동없이 댓글 관리 가능</li>
+          <ul>
+            <li>좋아요 기능 구현중...</li>
+          </ul>
         </ul>
       <b><li>파일 첨부</li></b>
       <ul>
         <li>이미지, 일반 파일을 구분하여 처리</li>
         <li>Drop 영역에 파일을 올리면 해당 파일의 이름을 Java script의 FormData 객체에 담아 컨트롤러에 요청 -> 실제 서버의 정해진 경로에 파일 저장, 화면에 목록으로 출력</li>
-        <li>각 파일마다 표시된 'x' 클릭시 위에서 실제 저장된 파일 삭제</li>
+        <li>각 파일마다 표시된 'x' 클릭시, 위에서 실제 경로에 저장된 파일 삭제</li>
+        <li>(게시글 수정 페이지에서는, deleteFile 배열에 하나씩 담은 후, 컨트롤러에 파라미터 값으로 넘겨 일괄 삭제)</li>
         <li>submit시 최종적으로 화면에 표시된 파일들의 이름을 files 배열에 담아 컨트롤러에 요청 -> tbl_attach에 데이터 저장</li>
+        <li>
+          게시글 삭제시, bno를 파라미터 값으로 컨트롤러에 요청
+          -> 해당 bno를 가진 tbl_attach 레코드 삭제, 
+        </li>
         <ul>
           <li>사용자 썸네일 이미지 관련 처리 구현중...</li>
         </ul>
