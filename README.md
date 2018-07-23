@@ -111,6 +111,8 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
 
 <b>< URL ></b>
 
+<img src="https://user-images.githubusercontent.com/38021616/43052493-38058086-8e61-11e8-85d2-108ff632c4b2.JPG" width="700px;">
+
 <hr>
 
 <b>< Function ></b>
