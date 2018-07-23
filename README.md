@@ -147,7 +147,9 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
     <li>글쓰기, 글수정, 글삭제, 글내용 보기 구현</li>
   </ul>
   
-  <b><li><li>파일 첨부</li></li></b>
+  <ol>
+  <b><li>파일 첨부</li></b>
+  </ol>
   <ul>
     <li>이미지, 일반 파일을 구분하여 처리</li>
     <li>Drop 영역에 파일을 올리면 해당 파일의 이름을 Java script의 FormData 객체에 담아 컨트롤러에 요청 -> 실제 서버의 정해진 경로에 파일 저장, 화면에 목록으로 출력</li>
