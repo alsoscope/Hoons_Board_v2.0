@@ -134,14 +134,20 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
   
   <b><li>로그인</li></b>
   <ul>
-    <li>Interceptor를 이용해 </li>
+    <li>Interceptor를 이용해</li>
+    <li>강제 로그인이 필요한 경우, 해당 요청 url을 기억해 로그인 후 해당 요청으로 이동</li>
     <li>입력된 uid, pw 값을 파라미터로 하여 컨트롤러에 전달, 해당 사용자가 존재하는지 확인</li>
     <ul>
       <li>네이버로 로그인 하기 기능 구현중...</li>
     </ul>
   </ul>
   
-  <b><li>파일 첨부</li></b>
+  <b><li>CRUD 게시판</li></b>
+  <ul>
+    <li>글쓰기, 글수정, 글삭제, 글내용 보기 구현</li>
+  </ul>
+  
+  <b><li><li>파일 첨부</li></li></b>
   <ul>
     <li>이미지, 일반 파일을 구분하여 처리</li>
     <li>Drop 영역에 파일을 올리면 해당 파일의 이름을 Java script의 FormData 객체에 담아 컨트롤러에 요청 -> 실제 서버의 정해진 경로에 파일 저장, 화면에 목록으로 출력</li>
