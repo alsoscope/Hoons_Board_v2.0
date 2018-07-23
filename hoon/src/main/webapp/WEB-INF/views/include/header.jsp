@@ -126,4 +126,3 @@
 	        $("#home").removeClass("active");
 	    }
 	</script>
-	

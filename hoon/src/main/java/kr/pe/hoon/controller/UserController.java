@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
+import kr.pe.hoon.domain.TempKey;
 import kr.pe.hoon.domain.UserVO;
 import kr.pe.hoon.dto.LoginDTO;
 import kr.pe.hoon.service.UserService;
+import kr.pe.hoon.util.MailUtils;
 
 @Controller
 @RequestMapping("user")
@@ -92,6 +94,17 @@ public class UserController {
 		return "/user/joinPost";
 	}
 	
+	@RequestMapping(value="joinConfirm", method=RequestMethod.GET)
+	public String emailConfirm(@ModelAttribute("uVO") UserVO uVO, Model model) throws Exception {
+		logger.info(uVO.getEmail() + ": auth confirmed");
+		uVO.setAuthstatus(1);
+		userService.updateAuthstatus(uVO);
+		
+		model.addAttribute("auth_check", 1);
+		
+		return "/user/joinPost";
+	}
+	
 	@RequestMapping(value="info", method=RequestMethod.GET)
 	public String info(HttpServletRequest request, Model model) throws Exception {
 		HttpSession session = request.getSession();
@@ -115,7 +128,10 @@ public class UserController {
 		return "redirect:/user/info";
 	}
 	
-	// 회원가입  관련 ajax 처리(중복 uid, email 체크)
+	// 이메일 인증 ------------------------------------------------------------------------------------------------------------------------------
+
+	
+	// 회원가입 관련 ajax 처리(중복 uid, email 체크) --------------------------------------------------------------------------------------------------
 	@ResponseBody
 	@RequestMapping(value="joinIdCheck", method=RequestMethod.POST)
 	public ResponseEntity<String> joinIdCheck(String uid) {

@@ -18,5 +18,7 @@ public interface UserService {
 	
 	public void update(UserVO uVO) throws Exception;
 	
+	public void updateAuthstatus(UserVO uVO) throws Exception;
+	
 	public void updateForCookie(String uid, String sessionid, Date next) throws Exception;
 }

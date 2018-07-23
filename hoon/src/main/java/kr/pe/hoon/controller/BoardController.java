@@ -107,7 +107,7 @@ public class BoardController {
 		return "redirect:/boards";
 	}
 	
-	// tbl_reply 관련 -----------------------------------------------------------------
+	// tbl_reply 관련 --------------------------------------------------------------------------------------------------
 	@ResponseBody
 	@RequestMapping(value="{bno}/replies", method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> readAllReplies(@PathVariable int bno, int page) {
@@ -188,7 +188,7 @@ public class BoardController {
 		return entity;
 	}
 	
-	// rbl_attach 관련 -----------------------------------------------------------------
+	// rbl_attach 관련 --------------------------------------------------------------------------------------------------
 	@ResponseBody
 	@RequestMapping("{bno}/attaches")
 	public List<String> readAllAttaches(@PathVariable int bno) throws Exception {

@@ -39,6 +39,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where uid = #{uid}
 	</update>
 	
+	<update id="updateAuthkey">
+		update tbl_user
+		set authkey = #{authkey}
+		where email = #{email}
+	</update>
+	
+	<update id="updateAuthstatus">
+		update tbl_user
+		set authstatus = #{authstatus}
+		where authkey = #{authkey}
+	</update>
+	
 	<update id="updateForCookie">
 		update tbl_user
 		set sessionkey = #{sessionid}, sessionlimit = #{next}

@@ -47,6 +47,16 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
+	public void updateAuthkey(UserVO uVO) throws Exception {
+		sqlSession.update("user.updateAuthkey", uVO);
+	}
+	
+	@Override
+	public void updateAuthstatus(UserVO uVO) throws Exception {
+		sqlSession.update("user.updateAuthstatus", uVO);
+	}
+	
+	@Override
 	public void updateForCookie(String uid, String sessionid, Date next) throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		map.put("uid", uid);

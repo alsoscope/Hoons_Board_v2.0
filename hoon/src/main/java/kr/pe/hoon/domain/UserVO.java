@@ -9,6 +9,8 @@ public class UserVO {
 	private String gender;
 	private String thumbnail;
 	private String email;
+	private String authkey;
+	private int authstatus;
 	private Date joindate;
 	
 	public String getUid() {
@@ -47,6 +49,18 @@ public class UserVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getAuthkey() {
+		return authkey;
+	}
+	public void setAuthkey(String authkey) {
+		this.authkey = authkey;
+	}
+	public int getAuthstatus() {
+		return authstatus;
+	}
+	public void setAuthstatus(int authstatus) {
+		this.authstatus = authstatus;
+	}
 	public Date getJoindate() {
 		return joindate;
 	}
@@ -57,7 +71,8 @@ public class UserVO {
 	@Override
 	public String toString() {
 		return "UserVO [uid=" + uid + ", pw=" + pw + ", name=" + name + ", gender=" + gender + ", thumbnail="
-				+ thumbnail + ", email=" + email + ", joindate=" + joindate + "]";
+				+ thumbnail + ", email=" + email + ", authkey=" + authkey + ", authstatus=" + authstatus + ", joindate="
+				+ joindate + "]";
 	}
-
+	
 }
