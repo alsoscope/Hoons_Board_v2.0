@@ -30,6 +30,11 @@
 							<input id="formform" class="btn btn-primary form-control" type="submit" value="로그인">
 						</div>
 						<div class="form-group">
+							<a href="#">
+								<img alt="네이버 아이디로 로그인하기" src="/resources/dist/img/login_naver.png" style="height: 40px;">
+							</a>
+						</div>
+						<div class="form-group">
 							<h6>아직 회원이 아니신가요?</h6>
 							<input onclick="location.href='/user/join'" class="btn btn-primary form-control" type="button" value="회원가입">
 						</div>

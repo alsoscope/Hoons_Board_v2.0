@@ -20,11 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
-import kr.pe.hoon.domain.TempKey;
 import kr.pe.hoon.domain.UserVO;
 import kr.pe.hoon.dto.LoginDTO;
 import kr.pe.hoon.service.UserService;
-import kr.pe.hoon.util.MailUtils;
 
 @Controller
 @RequestMapping("user")
@@ -56,6 +54,18 @@ public class UserController {
 			
 			userService.updateForCookie(uVO.getUid(), session.getId(), sessionlimit);
 		}
+	}
+	
+	@RequestMapping(value="naverLogin", method=RequestMethod.GET)
+	public String naverLoginGet(HttpSession session) {
+		
+		return "/user/naverLogin";
+	}
+	
+	@RequestMapping(value="naverLoginPost", method=RequestMethod.GET)
+	public String naverLoginPOST(HttpSession session) {
+		
+		return "/user/naverLoginPost";
 	}
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
@@ -94,6 +104,7 @@ public class UserController {
 		return "/user/joinPost";
 	}
 	
+	// 이메일 인증 
 	@RequestMapping(value="joinConfirm", method=RequestMethod.GET)
 	public String emailConfirm(@ModelAttribute("uVO") UserVO uVO, Model model) throws Exception {
 		logger.info(uVO.getEmail() + ": auth confirmed");
@@ -127,9 +138,6 @@ public class UserController {
 		
 		return "redirect:/user/info";
 	}
-	
-	// 이메일 인증 ------------------------------------------------------------------------------------------------------------------------------
-
 	
 	// 회원가입 관련 ajax 처리(중복 uid, email 체크) --------------------------------------------------------------------------------------------------
 	@ResponseBody
