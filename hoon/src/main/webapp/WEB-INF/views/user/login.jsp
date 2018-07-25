@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+		pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/header.jsp" %>
 	
@@ -10,11 +10,11 @@
 					<form action="/user/loginPost" method="post">
 						<c:if test="${param.login_error == 1 }">
 						<div class="alert alert-warning" role="alert">
-	                        <ul>
-	                            <li><font color="red">아이디 또는 비밀번호 오류</font></li>
-	                        </ul>
-                    	</div>
-                    	</c:if>
+							<ul>
+								<li><font color="red">아이디 또는 비밀번호 오류</font></li>
+							</ul>
+						</div>
+						</c:if>
 						<h3>로그인</h3>
 						<div class="form-group">
 							<input class="form-control" type="text" id="uid" name="uid" value="${cookie.savedId.value }" placeholder="아이디" autocomplete="off">
@@ -30,11 +30,11 @@
 							<input id="formform" class="btn btn-primary form-control" type="submit" value="로그인">
 						</div>
 						<div class="form-group">
-							<a href="#">
-								<img alt="네이버 아이디로 로그인하기" src="/resources/dist/img/login_naver.png" style="height: 40px;">
-							</a>
+							<a id="kakao-login-btn"></a>
+<!-- 							<a href="http://developers.kakao.com/logout"></a> -->
 						</div>
 						<div class="form-group">
+						<img alt="" src="/resources/dest/img/login_naver.png">
 							<h6>아직 회원이 아니신가요?</h6>
 							<input onclick="location.href='/user/join'" class="btn btn-primary form-control" type="button" value="회원가입">
 						</div>
