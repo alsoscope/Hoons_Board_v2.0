@@ -2,7 +2,7 @@
 		pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../include/header.jsp" %>
-	
+
 	<div class="container">
 		<div class="col-lg-4"></div>
 			<div class="col-lg-4">
@@ -30,11 +30,9 @@
 							<input id="formform" class="btn btn-primary form-control" type="submit" value="로그인">
 						</div>
 						<div class="form-group">
-							<a id="kakao-login-btn"></a>
-<!-- 							<a href="http://developers.kakao.com/logout"></a> -->
+							<div id="naver_id_login"></div>
 						</div>
 						<div class="form-group">
-						<img alt="" src="/resources/dest/img/login_naver.png">
 							<h6>아직 회원이 아니신가요?</h6>
 							<input onclick="location.href='/user/join'" class="btn btn-primary form-control" type="button" value="회원가입">
 						</div>
@@ -44,4 +42,16 @@
 		<div class="col-lg-4"></div>
 	</div>
 	
+	<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+	<script type="text/javascript">
+ 		var naver_id_login = new naver_id_login("p1SdIeQnCgBNAcOrb_fu", "http://127.0.0.1:8080/user/loginPostNaver");
+ 		var state = naver_id_login.getUniqState();
+		
+ 		naver_id_login.setButton("white", 2, 40);
+ 		naver_id_login.setDomain("http://127.0.0.1:8080/user/login");
+ 		naver_id_login.setState(state);
+ 		naver_id_login.setPopup();
+ 		naver_id_login.init_naver_id_login();
+	</script>
+
 <%@ include file="../include/footer.jsp" %>

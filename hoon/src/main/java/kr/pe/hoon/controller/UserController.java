@@ -33,7 +33,7 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping(value="login", method=RequestMethod.GET)
-	public String loginGET(HttpServletRequest request) {
+	public String loginGET() {
 		
 		return "/user/login";
 	}
@@ -56,16 +56,10 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="kakaoLogin", method=RequestMethod.GET)
-	public String naverLoginGet(HttpSession session) {
+	@RequestMapping(value="loginPostNaver", method=RequestMethod.GET)
+	public String loginPOSTNaver(HttpSession session) {
 		
-		return "/user/kakaoLogin";
-	}
-	
-	@RequestMapping(value="kakaoLoginPost", method=RequestMethod.GET)
-	public String naverLoginPOST(HttpSession session) {
-		
-		return "/user/kakaoLoginPost";
+		return "user/loginPostNaver";
 	}
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
