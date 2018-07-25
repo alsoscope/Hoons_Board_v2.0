@@ -35,7 +35,7 @@ public class UserController {
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String loginGET() {
 		
-		return "/user/login";
+		return "user/login";
 	}
 	
 	@RequestMapping(value="loginPost", method=RequestMethod.POST)
@@ -87,7 +87,7 @@ public class UserController {
 	@RequestMapping(value="join", method=RequestMethod.GET)
 	public String joinGET() {
 		
-		return "/user/join";
+		return "user/join";
 	}
 	
 	@RequestMapping(value="joinPost", method=RequestMethod.POST)
@@ -95,7 +95,7 @@ public class UserController {
 		logger.info("currnent join member: " + uVO.toString());
 		userService.create(uVO);
 		
-		return "/user/joinPost";
+		return "user/joinPost";
 	}
 	
 	// 이메일 인증 
@@ -107,7 +107,7 @@ public class UserController {
 		
 		model.addAttribute("auth_check", 1);
 		
-		return "/user/joinPost";
+		return "user/joinPost";
 	}
 	
 	@RequestMapping(value="info", method=RequestMethod.GET)
@@ -122,7 +122,7 @@ public class UserController {
 		logger.info("user info: " + uVO.toString());
 		model.addAttribute("uVO", uVO);
 		
-		return "/user/info";
+		return "user/info";
 	}
 	
 	@RequestMapping(value="edit", method=RequestMethod.POST)

@@ -4,7 +4,7 @@
 <%@ include file="../include/header.jsp" %>
 	
 	<script type="text/javascript">
-		var naver_id_login = new naver_id_login("p1SdIeQnCgBNAcOrb_fu", "http://127.0.0.1:8080/user/loginPostNaver");
+		var naver_id_login = new naver_id_login("p1SdIeQnCgBNAcOrb_fu", "http://localhost:8080/user/loginPostNaver");
 		
 		// 접근 토큰 값 출력
 		alert(naver_id_login.oauthParams.access_token);
