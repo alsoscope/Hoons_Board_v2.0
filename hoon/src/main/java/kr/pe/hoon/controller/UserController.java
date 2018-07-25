@@ -56,16 +56,16 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="naverLogin", method=RequestMethod.GET)
+	@RequestMapping(value="kakaoLogin", method=RequestMethod.GET)
 	public String naverLoginGet(HttpSession session) {
 		
-		return "/user/naverLogin";
+		return "/user/kakaoLogin";
 	}
 	
-	@RequestMapping(value="naverLoginPost", method=RequestMethod.GET)
+	@RequestMapping(value="kakaoLoginPost", method=RequestMethod.GET)
 	public String naverLoginPOST(HttpSession session) {
 		
-		return "/user/naverLoginPost";
+		return "/user/kakaoLoginPost";
 	}
 	
 	@RequestMapping(value="logout", method=RequestMethod.GET)
