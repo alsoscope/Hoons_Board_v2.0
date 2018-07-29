@@ -135,8 +135,10 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
         <ul>
           <li>임시 회원가입 이후, 인증용 메일 수신(임의의 authkey정보 포함) -> 이메일 인증 + 사용자 권한 활성화</li>
         </ul>
+    </ol>   
    </ul>
-  
+ </ol> 
+ 
   <b><li>로그인</li></b>
   <ul>
     <li>Interceptor를 이용해</li>
@@ -144,7 +146,7 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
     <li>입력된 uid, pw 값을 파라미터로 하여 컨트롤러에 전달, 해당 사용자가 존재하는지 확인</li>
     <li>'로그인 유지' 선택에 따른 쿠키 관리 -> 자동 로그인 구현</li>
     <li>세션을 이용한 로그인 상태 유지</li>
-    <li>네이버로 로그인 하기(사용자 정보 연동 )</li>
+    <li>네이버로 로그인 하기(사용자 정보 연동, 세션 유지)</li>
   </ul>
   
   <b><li>CRUD 게시판</li></b>
