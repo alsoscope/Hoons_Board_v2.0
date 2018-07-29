@@ -32,6 +32,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	// 일반 로그인
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String loginGET() {
 		
@@ -56,12 +57,25 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="loginPostNaver", method=RequestMethod.GET)
-	public String loginPOSTNaver(HttpSession session) {
+	// "네이버 아이디로 로그인하기" 로그인
+	@RequestMapping(value="loginNaver", method=RequestMethod.GET)
+	public String loginNaver() {
 		
-		return "user/loginPostNaver";
+		return "/user/loginNaver";
 	}
 	
+	@RequestMapping(value="loginPostNaver", method=RequestMethod.POST)
+	public String loginPOSTNaver(@ModelAttribute("uVO") UserVO uVO) throws Exception {
+		if (uVO.getGender().equals("M")) {
+			uVO.setGender("남자");
+		} else if (uVO.getGender().equals("W")) {
+			uVO.setGender("여자");
+		}
+		
+		return "/user/loginPost";
+	}
+	
+	// 로그아웃
 	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		Object obj = session.getAttribute("login");
@@ -84,6 +98,7 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	// 회원가입
 	@RequestMapping(value="join", method=RequestMethod.GET)
 	public String joinGET() {
 		
@@ -110,6 +125,7 @@ public class UserController {
 		return "user/joinPost";
 	}
 	
+	// user 정보
 	@RequestMapping(value="info", method=RequestMethod.GET)
 	public String info(HttpServletRequest request, Model model) throws Exception {
 		HttpSession session = request.getSession();
@@ -125,6 +141,7 @@ public class UserController {
 		return "user/info";
 	}
 	
+	// user 정보 수정
 	@RequestMapping(value="edit", method=RequestMethod.POST)
 	public String edit(@ModelAttribute("uVO") UserVO uVO) throws Exception {
 		userService.update(uVO);

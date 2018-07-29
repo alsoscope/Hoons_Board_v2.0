@@ -27,7 +27,7 @@
 							<input type="hidden" name="uri" value="${param.uri }">
 						</div>
 						<div class="form-group">
-							<input id="formform" class="btn btn-primary form-control" type="submit" value="로그인">
+							<input id="submit-btn" class="btn btn-primary form-control" type="submit" value="로그인">
 						</div>
 						<div class="form-group">
 							<div id="naver_id_login"></div>
@@ -42,15 +42,31 @@
 		<div class="col-lg-4"></div>
 	</div>
 	
-	<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+	<!-- uid, pw null 체크 -->
+	<script>
+		$("#submit-btn").click(function() {
+			var uid = $("#uid").val();
+			var pw = $("#pw").val();
+			
+			if (uid == null || uid == "") {
+				alert("아이디를 입력해주세요.");
+				return false;
+			} else if (pw == null || pw == "") {
+				alert("비밀번호를 입력해주세요.");
+				return false;
+			}
+		});
+	</script>
+	
+	<!-- "네이버 아이디로 로그인" 버튼 노출 영역 -->
 	<script type="text/javascript">
- 		var naver_id_login = new naver_id_login("p1SdIeQnCgBNAcOrb_fu", "http://localhost:8080/user/loginPostNaver");
+ 		var naver_id_login = new naver_id_login("p1SdIeQnCgBNAcOrb_fu", "http://localhost:8080/user/loginNaver");
  		var state = naver_id_login.getUniqState();
 		
- 		naver_id_login.setButton("white", 2, 40);
+ 		naver_id_login.setButton("green", 3, 40);
  		naver_id_login.setDomain("http://localhost:8080/user/login");
  		naver_id_login.setState(state);
- 		naver_id_login.setPopup();
+//  		naver_id_login.setPopup();
  		naver_id_login.init_naver_id_login();
 	</script>
 

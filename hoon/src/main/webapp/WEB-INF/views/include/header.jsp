@@ -104,7 +104,7 @@
 							<li><a href="/user/logout" onclick="return confirm('로그아웃 하시겠습니까?');"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
 							<li><a href="/user/info"><i class="fa fa-user"></i> 내 정보</a></li>
 							<li class="divider"></li>
-							<li><a href="#"><i class="fa fa-trash-o"></i> 회원탈퇴</a></li>
+<!-- 							<li><a href="#"><i class="fa fa-trash-o"></i> 회원탈퇴</a></li> -->
 							</c:if>
 						</ul>
 					</li>
