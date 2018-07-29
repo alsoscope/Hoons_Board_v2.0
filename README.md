@@ -143,7 +143,7 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
     <ol>
       <b><li>기본 기능</li></b>
         <ul>
-          <li>Interceptor를 이용해</li>
+          <li>Interceptor를 이용한 세션, 쿠키 관리</li>
           <li>강제 로그인이 필요한 경우, AuthInterceptor에서 해당 요청 url을 기억 -> 로그인 후 해당 요청으로 이동</li>
           <li>입력된 uid, pw 값을 파라미터로 하여 컨트롤러에 전달, 해당 사용자가 존재하는지 확인</li>
           <li>'로그인 유지' 선택에 따른 쿠키 관리 -> 자동 로그인 구현</li>
