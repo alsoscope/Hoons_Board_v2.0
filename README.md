@@ -183,6 +183,13 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
       </ul>
     </ol>
   </ul>
+  
+  <b><li>About</li></b>
+  <ul>
+    <ol>
+      <b><li>관리자에게 메일 보내기</li></b>
+    </ol>
+  </ul
 </ol>
 
 
