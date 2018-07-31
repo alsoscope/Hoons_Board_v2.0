@@ -93,7 +93,7 @@
 	</div>
 
 	<!-- 페이징 -->
-	<div class="container" align="center">
+	<div class="container" align="center" style="margin-bottom: 20px">
 		<nav>
 			<ul class="pagination">
 				<c:if test="${pageMaker.prev }">
