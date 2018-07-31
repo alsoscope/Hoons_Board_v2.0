@@ -11,11 +11,6 @@
 			</div>
 			<a class="btn btn-primary pull-right" href="#">Welcome!</a>
 		</div>
-		
-		<div>
-			
-		</div>
 	</div>
-	
-	
+
 <%@ include file="./include/footer.jsp" %>

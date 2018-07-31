@@ -12,7 +12,7 @@
 	</div>
 	
 	<!-- 글 보기 -->
-	<div class="container"  style="margin-bottom: 50px; max-width: 70%;">
+	<div class="container" style="margin-bottom: 50px; max-width: 70%;">
 		<div class="panel-body">
 			<div class="table-responsive">
 				<div>

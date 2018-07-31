@@ -55,7 +55,7 @@
 	</div>
 	
 	<script>
-		// 1. 비밀번호 체크버튼
+		// 1. password 체크버튼 활성화
 		var passwordCkBtn = $("#password-ck-btn");
 		var passwordCk = $("#password-ck");
 		
@@ -86,7 +86,7 @@
 			finalCheck();
 		});
 		
-		// 2. 비동기적 아이디 중복 체크
+		// 2. 비동기적 uid 중복 체크
 		var uidObj = $("#uid");
 		
 		function joinIdCheck() {
@@ -121,7 +121,7 @@
 			finalCheck();
 		});
 		
-		// 3. 이름 null 체크
+		// 3. name null 체크
 		var nameObj = $("#name");
 		var nameMsg = $("#name-msg");
 		
@@ -142,7 +142,7 @@
 			finalCheck();
 		});
 		
-		// 4. 비동기적 이메일 체크
+		// 4. 비동기적 email 체크
 		var emailObj = $("#email");
 		
 		function joinEmailCheck() {
@@ -155,7 +155,6 @@
 				data:{email:email},
 				dataType:"text",
 				success:function(result) {
-					console.log(result);
 					if (result == "EMAIL_DUP") {
 						emailMsg.text("이미 사용중인 이메일입니다.");
 						emailResult = false;
