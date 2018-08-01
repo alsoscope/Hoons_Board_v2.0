@@ -21,6 +21,8 @@ public interface BoardDAO {
 	
 	public void updateReplycnt(int bno, int cnt) throws Exception;
 	
+	public void updateLikecnt(int bno, int cnt) throws Exception;
+	
 	public void delete(int bno) throws Exception;
 	
 	// Attach 관련

@@ -16,7 +16,6 @@ public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	// Board 관련
 	@Override
 	public void create(BoardVO bVO) throws Exception {
 		sqlSession.insert("board.create", bVO);
@@ -53,6 +52,15 @@ public class BoardDAOImpl implements BoardDAO {
 		map.put("cnt", cnt);
 		
 		sqlSession.update("board.updateReplycnt", map);
+	}
+	
+	@Override
+	public void updateLikecnt(int bno, int cnt) throws Exception {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("bno", bno);
+		map.put("cnt", cnt);
+		
+		sqlSession.update("board.updateLikecnt", map);
 	}
 	
 	@Override

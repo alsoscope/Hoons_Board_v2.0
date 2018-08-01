@@ -5,7 +5,7 @@
 	
 <mapper namespace="board">
 
-	<!-- Board 관련 -->
+	<!-- tbl_board 관련 -->
 	<insert id="create">
 		insert into tbl_board (title, content, writer)
 		values (#{title}, #{content}, #{writer})
@@ -49,6 +49,12 @@
 		where bno = #{bno}
 	</update>
 	
+	<update id="updateLikecnt">
+		update tbl_board
+		set likecnt = likecnt + #{cnt}
+		where bno = #{bno}
+	</update>
+	
 	<delete id="delete">
 		delete from tbl_board
 		where bno = #{bno}
@@ -81,7 +87,7 @@
 			</if>
 		</sql>
 	
-	<!-- Attach 관련 -->
+	<!-- tbl_attach 관련 -->
 	<insert id="createAttach">
 		insert into tbl_attach (fullName, bno)
 		values (#{fullName}, LAST_INSERT_ID())

@@ -28,10 +28,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.pe.hoon.domain.BoardVO;
 import kr.pe.hoon.domain.Criteria;
+import kr.pe.hoon.domain.LikeVO;
 import kr.pe.hoon.domain.PageMaker;
 import kr.pe.hoon.domain.ReplyVO;
 import kr.pe.hoon.domain.SearchCriteria;
 import kr.pe.hoon.service.BoardService;
+import kr.pe.hoon.service.LikeService;
 import kr.pe.hoon.service.ReplyService;
 import kr.pe.hoon.util.MediaUtils;
 import kr.pe.hoon.util.UploadFileUtils;
@@ -49,7 +51,10 @@ public class BoardController {
 	@Autowired
 	private ReplyService replyService;
 	
-	// tbl_board 관련
+	@Autowired
+	private LikeService likeService;
+	
+	// tbl_board 관련 --------------------------------------------------------------------------------------------------
 	@RequestMapping(value="new", method=RequestMethod.GET)
 	public String createGET() throws Exception {
 		
@@ -290,5 +295,22 @@ public class BoardController {
 		}
 		
 		return new ResponseEntity<>("deleted", HttpStatus.OK);
+	}
+	
+	// tbl_like 관련 --------------------------------------------------------------------------------------------------
+	@ResponseBody
+	@RequestMapping(value="{bno}/likes", method=RequestMethod.GET)
+	public ResponseEntity<String> createLike(@PathVariable int bno, String uid) throws Exception {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			likeService.doLike(bno, uid);
+			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+		} catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
 	}
 }
