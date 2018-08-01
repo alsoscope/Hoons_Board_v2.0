@@ -17,15 +17,6 @@ public class LikeServiceTest {
 	private LikeService likeService;
 	
 	@Test @Ignore
-	public void testCreate() throws Exception {
-		LikeVO lVO = new LikeVO();
-		lVO.setBno(162);
-		lVO.setUid("aaa");
-		
-		likeService.create(lVO);
-	}
-	
-	@Test @Ignore
 	public void testRead() throws Exception {
 		LikeVO lVO = new LikeVO();
 		lVO.setBno(162);

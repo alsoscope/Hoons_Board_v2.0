@@ -19,10 +19,15 @@
 					<font size="4" color="gray"> &#35; <i>${bVO.bno }</i></font>
 					<div class="content-identity pull-right" style="margin-bottom: 10px">
 						<div class="content-identity-count" style="width: 100px">
+							<c:if test="${login.uid != null }">
 							<a style="align-items: right" href="#">
 								<i id="like" class="fa fa-heart fa-2x"></i>
-								<font size="4"> ${bVO.likecnt }</font>
 							</a>
+							</c:if>
+							<c:if test="${login.uid == null }">
+								<i id="like" class="fa fa-heart fa-2x"></i>
+							</c:if>
+							<font size="4"> ${bVO.likecnt }</font>
 						</div>
 						<div class="content-identity-count" style="width: 100px">
 							<i class="fa fa-comment fa-2x"></i>
@@ -141,7 +146,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="exampleModalLabel">댓글</h4>
+					<h4 class="modal-title" id="exampleModalLabel"></h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
@@ -158,6 +163,7 @@
 		</div>
 	</div>
 	
+	<!-- 첨부파일 템플릿 -->
 	<script id="attached-template" type="text/x-handlebars-template">
 		<li data-src="{{fullName}}">
 			<span class="mailbox-attachment-icon has-img">
@@ -169,34 +175,8 @@
 		</li>
 	</script>
 	
-	<script id="reply-template" type="text/x-handlebars-template">
-		{{#each .}}
-			<li class="list-group-item" data-rno={{rno}}>
-				<div class="timeline-item">
-					<div class="media-left" style="margin-top: 10px; margin-right: 10px;">
-						<a href="#">
-							<img class="media-object" src="..." alt="IMG">
-						</a>
-					</div>
-					<div class="media-body">
-						<h4 class="media-heading">{{replywriter}}</h4>
-						<span class="time">
-							<i class="fa fa-clock-o"></i> {{prettifyDate regdate}}
-						</span>
-					</div>
-					<div class="timeline-boddy" style="margin-top: 10px; margin-bottom: 30px;">{{replytext}}</div>
-					{{#eqReplywriter replywriter}}
-						<div class="timeline-footer" style="margin-top: 10px">
-							<button type='button' class='btn btn-info' data-toggle='modal' data-target='#replyModal'>관리</button>
-						</div>
-					{{/eqReplywriter}}
-				</div>
-			</li>
-		{{/each}}
-	</script>
-	
+	<!-- 첨부파일 목록 표시 -->
 	<script>
-		getReplyList(1);
 		getAttachList();
 	
 		function getAttachList() {
@@ -218,31 +198,73 @@
 				}
 			});
 		}
-		
+	</script>
+	
+	<!-- 댓글 템플릿 -->
+	<script id="reply-template" type="text/x-handlebars-template">
+		{{#each .}}
+			<li class="list-group-item" data-rno={{rno}}>
+				<div class="timeline-item">
+					<div class="media-left" style="margin-top: 10px; margin-right: 10px;">
+						<a href="#">
+							<img class="media-object" src="..." alt="IMG">
+						</a>
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading">{{replywriter}}</h4>
+						<span class="time">
+							<i class="fa fa-clock-o"></i> {{prettifyDate regdate}}
+						</span>
+					</div>
+					<div class="timeline-boddy" style="margin-top: 10px; margin-bottom: 30px;">{{replytext}}</div>
+					{{#eqReplywriter replywriter}}
+						<div class="timeline-footer" style="margin-top: 10px">
+							<button type="button" class="btn btn-info" data-toggle="modal" data-target="#replyModal">관리</button>
+						</div>
+					{{/eqReplywriter}}
+				</div>
+			</li>
+		{{/each}}
+	</script>
+	
+	<!-- 댓글 달기 -->
+	<script>
 		$("#reply-submit-btn").click(function() {
-			var bno = "${bVO.bno}";
 			var replytext = $("#replytext").val();
-			var replywriter = "${login.uid}";
-		
-			$.ajax({
-				type:"POST",
-				url:"/boards/" + bno + "/replies/new",
-				headers:{
-					"Content-Type":"application/json",
-					"X-HTTP-Method-Override":"POST"
-				},
-				data:JSON.stringify({
-					replytext:replytext,
-					replywriter:replywriter
-				}),
-				dataType:"text",
-				success:function() {
-					$("#replytext").val("");
-					getReplyList(1); 
-				}
-			});
+			
+			if (replytext == null || replytext == "") {
+				alert("내용을 입력해 주세요.");
+				return false;
+			} else {
+				var bno = "${bVO.bno}";
+				var replytext = $("#replytext").val();
+				var replywriter = "${login.uid}";
+			
+				$.ajax({
+					type:"POST",
+					url:"/boards/" + bno + "/replies/new",
+					headers:{
+						"Content-Type":"application/json",
+						"X-HTTP-Method-Override":"POST"
+					},
+					data:JSON.stringify({
+						replytext:replytext,
+						replywriter:replywriter
+					}),
+					dataType:"text",
+					success:function() {
+						$("#replytext").val("");
+						getReplyList(1); 
+					}
+				});
+			}
 		});
-		
+	</script>
+	
+	<!-- 댓글 목록 불러오기 -->
+	<script>		
+		getReplyList(1);
+	
 		function getReplyList(page) {
 			var bno = "${bVO.bno}";
 			
@@ -268,9 +290,12 @@
 				}
 			});
 		}
-		
+	</script>
+	
+	<!-- 댓글 페이징 처리 -->
+	<script>
 		function getReplyPages(pageMaker) {
-			str = ""; 
+			str = "";
 			
 			if (pageMaker.prev) {
 				str += "<li><a href='" + (pageMaker.startPage - pageMaker.displayPageNum) + "'>&laquo;</a></li>";
@@ -287,22 +312,33 @@
 			
 			$(".pagination").html(str);
 		}
+	</script>
 		
+	<!-- 댓글 정보 최신화 -->
+	<script>	
 		function getSubInfo(boardInfo) {
 			var replycnt = boardInfo.replycnt;
 			
 			$(".replycnt").html(" " + replycnt);
 		}
+	</script>
 		
+	<!-- 댓글 관리 모달창 -->
+	<script>	
 		$("#replies").on("click", ".list-group-item", function() {
 			var reply = $(this);
 			var timelineheader = reply.find(".timeline-header").html();
 			var replytext = reply.find(".timeline-boddy").text();
+			var rno = reply.attr("data-rno");
 			
 			$("#replytext-modal").val(replytext);
 			$(".modal-header").html(timelineheader);
+			$(".modal-title").html(rno);
 		});
+	</script>
 		
+	<!-- 댓글 삭제 -->	
+	<script>		
 		$("#reply-del-btn").click(function() {
 			if(confirm("정말로 삭제하시겠습니까?")) {
 				var rno = $(".list-group-item").attr("data-rno");
@@ -325,11 +361,15 @@
 				});
 			}
 		});
-		
+	</script>
+	
+	<!-- 댓글 수정 -->
+	<script>
 		$("#reply-edit-btn").click(function() {
-			var rno = $(".list-group-item").attr("data-rno");
+			var rno = $(".modal-title").html();
 			var replytext = $("#replytext-modal").val();
 			var bno = "${bVO.bno}";
+			var page = $(".pagination").attr("href");
 			
 			$.ajax({
 				type:"PUT",
@@ -350,7 +390,10 @@
 				}
 			});
 		});
-		
+	</script>
+	
+	<!-- 댓글 페이지 버튼 처리 -->
+	<script>
 		$(".pagination").on("click", "li a", function(event) {
 			event.preventDefault();
 			
@@ -358,7 +401,10 @@
 			
 			getReplyList(page);
 		});
-		
+	</script>
+	
+	<!-- Handlebars 기능 확장 - 날짜 포맷 -->
+	<script>
 		Handlebars.registerHelper("prettifyDate", function(date) {
 			var dateObj = new Date(date);
 			
@@ -371,7 +417,10 @@
 			
 			return year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 		});
-		
+	</script>
+	
+	<!-- Handlebars 기능 확장 - 로그인 여부에 따른 댓글관리 버튼 표시여부 -->
+	<script>		
 		Handlebars.registerHelper("eqReplywriter", function(replywriter, block) {
 			var accum = "";
 		
@@ -383,7 +432,7 @@
 		});
 	</script>
 	
-	<!-- Board 관련 -->
+	<!-- 글 삭제 -->
 	<script>
 		$("#del-btn").click(function(event) {
 			var bno = "${bVO.bno}";

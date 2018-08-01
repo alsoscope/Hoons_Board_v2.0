@@ -299,8 +299,8 @@ public class BoardController {
 	
 	// tbl_like 관련 --------------------------------------------------------------------------------------------------
 	@ResponseBody
-	@RequestMapping(value="{bno}/likes", method=RequestMethod.GET)
-	public ResponseEntity<String> createLike(@PathVariable int bno, String uid) throws Exception {
+	@RequestMapping(value="{bno}/{uid}/like", method=RequestMethod.GET)
+	public ResponseEntity<String> createLike(@PathVariable int bno,@PathVariable String uid) throws Exception {
 		ResponseEntity<String> entity = null;
 		
 		try {
