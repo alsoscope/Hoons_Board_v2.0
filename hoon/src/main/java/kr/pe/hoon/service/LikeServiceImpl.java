@@ -18,24 +18,26 @@ public class LikeServiceImpl implements LikeService {
 	
 	@Override
 	@Transactional
-	public void doLike(int bno, String uid) throws Exception {
-		lDAO.create(bno, uid);
-		bDAO.updateLikecnt(bno, 1);
+	public void Like(int bno, String uid) throws Exception {
+		LikeVO lVO = lDAO.read(bno, uid);
+		
+		if (lVO == null) {
+			lDAO.create(bno, uid);
+			bDAO.updateLikecnt(bno, 1);
+		} else {
+			lDAO.delete(bno, uid);
+			bDAO.updateLikecnt(bno, -1);
+		}
 	}
 
 	@Override
-	public LikeVO read(LikeVO lVO) throws Exception {
-		return lDAO.read(lVO);
+	public LikeVO read(int bno, String uid) throws Exception {
+		return lDAO.read(bno, uid);
 	}
 
 	@Override
-	public int readCount(int bno) throws Exception {
-		return lDAO.readCount(bno);
-	}
-
-	@Override
-	public void delete(LikeVO lVO) throws Exception {
-		lDAO.delete(lVO);
+	public void delete(int bno, String uid) throws Exception {
+		lDAO.delete(bno, uid);
 	}
 
 }

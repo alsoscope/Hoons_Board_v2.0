@@ -60,7 +60,7 @@
 		where bno = #{bno}
 	</delete>
 	
-		<!-- Board 관련 동적 쿼리 -->
+		<!-- tbl_board 관련 동적 쿼리 -->
 		<sql id="query">
 			<if test="query != null">
 				where title like CONCAT("%", #{query}, "%")

@@ -16,12 +16,6 @@
 		where bno = #{bno} and uid = #{uid}
 	</select>
 	
-<!-- 	<select id="readCount" resultType="int"> -->
-<!-- 		select count(lno) -->
-<!-- 		from tbl_like -->
-<!-- 		where bno = #{bno} -->
-<!-- 	</select> -->
-	
 	<delete id="delete">
 		delete from tbl_like
 		where bno = #{bno} and uid = #{uid}

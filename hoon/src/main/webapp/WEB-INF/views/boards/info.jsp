@@ -27,7 +27,7 @@
 							<c:if test="${login.uid == null }">
 								<i id="like" class="fa fa-heart fa-2x"></i>
 							</c:if>
-							<font size="4"> ${bVO.likecnt }</font>
+							<font size="4" class="likecnt"> ${bVO.likecnt }</font>
 						</div>
 						<div class="content-identity-count" style="width: 100px">
 							<i class="fa fa-comment fa-2x"></i>
@@ -125,7 +125,6 @@
 	</div>
 	
 	<div class="container" style="max-width: 70%;">
-	
 		<!-- 댓글 목록 -->
 		<div>
 			<ul id="replies" class="list-group">
@@ -163,6 +162,78 @@
 		</div>
 	</div>
 	
+	<!-- tbl_like 관련 ----------------------------------------------------------------------------------------->
+	<!-- 좋아요 토글 -->
+	<script>
+		$("#like").click(function() {
+			var bno = "${bVO.bno}";
+			var uid = "${login.uid}";
+			
+			$.ajax({
+				type:"GET",
+				url:"/boards/" + bno + "/" + uid,
+				dataType:"text",
+				success:function(result) {
+					if (result == "EXIST") {
+						if (confirm("좋아요를 취소하시겠습니까?")) {
+							likeToggle();
+							$("#like").removeAttr("style");
+							return false;
+						}
+					}
+					
+					$("#like").css("color", "red");
+					likeToggle();
+				}
+			});
+			
+			// 서버에서 토글 제어
+			function likeToggle() {
+				$.ajax({
+					type:"GET",
+					url:"/boards/" + bno + "/" + uid + "/like",
+					dataType:"json",
+					success:function(data) {
+						var likecnt = data.likecnt;
+						
+						getLikeCnt(likecnt);
+					}
+				});
+			}
+		});
+	</script>
+	
+	<!-- 좋아요 수 최신화 -->
+	<script>
+		function getLikeCnt(likecnt) {
+			$(".likecnt").html(" " + likecnt);
+		}
+	</script>
+	
+	<!-- 좋아요 버튼 색 토글 -->
+	<script>
+		likeColor();
+		
+		function likeColor() {
+			var bno = "${bVO.bno}";
+			var uid = "${login.uid}";
+			
+			$.ajax({
+				type:"GET",
+				url:"/boards/" + bno + "/" + uid,
+				dataType:"text",
+				success:function(result) {
+					if (result == "NOT_EXIST") {
+						$("#like").removeAttr("style");
+					} else if (result == "EXIST") {
+						$("#like").css("color", "red");
+					}
+				}
+			});
+		}
+	</script>
+	
+	<!-- tbl_attach 관련 ----------------------------------------------------------------------------------------->
 	<!-- 첨부파일 템플릿 -->
 	<script id="attached-template" type="text/x-handlebars-template">
 		<li data-src="{{fullName}}">
@@ -200,6 +271,7 @@
 		}
 	</script>
 	
+	<!-- tbl_reply 관련 ----------------------------------------------------------------------------------------->
 	<!-- 댓글 템플릿 -->
 	<script id="reply-template" type="text/x-handlebars-template">
 		{{#each .}}
@@ -262,7 +334,7 @@
 	</script>
 	
 	<!-- 댓글 목록 불러오기 -->
-	<script>		
+	<script>
 		getReplyList(1);
 	
 		function getReplyList(page) {
@@ -286,7 +358,7 @@
 					
 					$("#replies").html(template(replyList));
 					getReplyPages(pageMaker);
-					getSubInfo(boardInfo);
+					getReplyCnt(boardInfo);
 				}
 			});
 		}
@@ -314,9 +386,9 @@
 		}
 	</script>
 		
-	<!-- 댓글 정보 최신화 -->
-	<script>	
-		function getSubInfo(boardInfo) {
+	<!-- 댓글 수 최신화 -->
+	<script>
+		function getReplyCnt(boardInfo) {
 			var replycnt = boardInfo.replycnt;
 			
 			$(".replycnt").html(" " + replycnt);
@@ -324,7 +396,7 @@
 	</script>
 		
 	<!-- 댓글 관리 모달창 -->
-	<script>	
+	<script>
 		$("#replies").on("click", ".list-group-item", function() {
 			var reply = $(this);
 			var timelineheader = reply.find(".timeline-header").html();
@@ -338,7 +410,7 @@
 	</script>
 		
 	<!-- 댓글 삭제 -->	
-	<script>		
+	<script>
 		$("#reply-del-btn").click(function() {
 			if(confirm("정말로 삭제하시겠습니까?")) {
 				var rno = $(".list-group-item").attr("data-rno");
@@ -432,6 +504,7 @@
 		});
 	</script>
 	
+	<!-- tbl_board 관련 ----------------------------------------------------------------------------------------->
 	<!-- 글 삭제 -->
 	<script>
 		$("#del-btn").click(function(event) {

@@ -18,24 +18,24 @@ public class LikeServiceTest {
 	
 	@Test @Ignore
 	public void testRead() throws Exception {
-		LikeVO lVO = new LikeVO();
-		lVO.setBno(162);
-		lVO.setUid("aaa");
+//		LikeVO lVO = new LikeVO();
+//		lVO.setBno(162);
+//		lVO.setUid("aaa");
 		
-		likeService.read(lVO);
+//		likeService.read(lVO);
 	}
 	
 	@Test
 	public void testReadCount() throws Exception {
-		likeService.readCount(162);
+//		likeService.readCount(162);
 	}
 	
 	@Test @Ignore
 	public void testDelete() throws Exception {
-		LikeVO lVO = new LikeVO();
-		lVO.setBno(162);
-		lVO.setUid("aaa");
+//		LikeVO lVO = new LikeVO();
+//		lVO.setBno(162);
+//		lVO.setUid("aaa");
 		
-		likeService.delete(lVO);
+//		likeService.delete(lVO);
 	}
 }

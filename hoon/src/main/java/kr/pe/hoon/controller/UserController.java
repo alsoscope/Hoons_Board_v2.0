@@ -76,7 +76,7 @@ public class UserController {
 	}
 	
 	// 로그아웃
-	@RequestMapping(value="log]out", method=RequestMethod.GET)
+	@RequestMapping(value="logout", method=RequestMethod.GET)
 	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		Object obj = session.getAttribute("login");
 		

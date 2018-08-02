@@ -24,18 +24,21 @@ public class LikeDAOImpl implements LikeDAO {
 	}
 
 	@Override
-	public LikeVO read(LikeVO lVO) throws Exception {
-		return sqlSession.selectOne("like.read", lVO);
+	public LikeVO read(int bno, String uid) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("bno", bno);
+		map.put("uid", uid);
+		
+		return sqlSession.selectOne("like.read", map);
 	}
 
 	@Override
-	public int readCount(int bno) throws Exception {
-		return sqlSession.selectOne("like.readCount", bno);
-	}
-	
-	@Override
-	public void delete(LikeVO lVO) throws Exception {
-		sqlSession.delete("like.delete", lVO);
+	public void delete(int bno, String uid) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("bno", bno);
+		map.put("uid", uid);
+		
+		sqlSession.delete("like.delete", map);
 	}
 
 }

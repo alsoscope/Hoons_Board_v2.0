@@ -300,12 +300,12 @@ public class BoardController {
 	// tbl_like 관련 --------------------------------------------------------------------------------------------------
 	@ResponseBody
 	@RequestMapping(value="{bno}/{uid}/like", method=RequestMethod.GET)
-	public ResponseEntity<String> createLike(@PathVariable int bno,@PathVariable String uid) throws Exception {
-		ResponseEntity<String> entity = null;
+	public ResponseEntity<BoardVO> like(@PathVariable int bno, @PathVariable String uid) throws Exception {
+		ResponseEntity<BoardVO> entity = null;
 		
 		try {
-			likeService.doLike(bno, uid);
-			entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+			likeService.Like(bno, uid);
+			entity = new ResponseEntity<>(boardService.readNoViewcnt(bno), HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
 			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -313,4 +313,27 @@ public class BoardController {
 		
 		return entity;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="{bno}/{uid}", method=RequestMethod.GET)
+	public ResponseEntity<String> readLike(@PathVariable int bno, @PathVariable String uid) throws Exception {
+		ResponseEntity<String> entity = null;
+		
+		try {
+			LikeVO lVO = likeService.read(bno, uid);
+			
+			if (lVO != null) {
+				entity = new ResponseEntity<>("EXIST", HttpStatus.OK);
+				logger.info(lVO.toString());
+			} else {
+				entity = new ResponseEntity<>("NOT_EXIST", HttpStatus.OK);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		
+		return entity;
+	}
+
 }
