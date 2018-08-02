@@ -163,6 +163,9 @@ alter table tbl_like add foreign key(uid) references tbl_user(uid);
           <li>쿠키를 이용한 자동 로그인</li>
         </ul>
       <b><li>네이버로 로그인 하기</li></b>
+      <ul>
+       <li>네이버 사용자 정보를 가져옴 -> 로그인 유지(DB 반영 X)</li>
+      </ul>
   </ul>
   
   <b><li>CRUD 게시판</li></b>
