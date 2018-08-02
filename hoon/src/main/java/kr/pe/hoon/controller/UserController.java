@@ -113,7 +113,7 @@ public class UserController {
 		return "user/joinPost";
 	}
 	
-	// 이메일 인증 
+	// email 인증 
 	@RequestMapping(value="joinConfirm", method=RequestMethod.GET)
 	public String emailConfirm(@ModelAttribute("uVO") UserVO uVO, Model model) throws Exception {
 		logger.info(uVO.getEmail() + ": auth confirmed");
@@ -125,7 +125,7 @@ public class UserController {
 		return "user/joinPost";
 	}
 	
-	// user 정보
+	// 사용자 정보
 	@RequestMapping(value="info", method=RequestMethod.GET)
 	public String info(HttpServletRequest request, Model model) throws Exception {
 		HttpSession session = request.getSession();
@@ -141,7 +141,7 @@ public class UserController {
 		return "user/info";
 	}
 	
-	// user 정보 수정
+	// 사용자 정보 수정
 	@RequestMapping(value="edit", method=RequestMethod.POST)
 	public String edit(@ModelAttribute("uVO") UserVO uVO) throws Exception {
 		userService.update(uVO);
@@ -151,14 +151,15 @@ public class UserController {
 	}
 	
 	// 회원가입 관련 ajax 처리(중복 uid, email 체크) --------------------------------------------------------------------------------------------------
+	// ajax uid 중복체크
 	@ResponseBody
-	@RequestMapping(value="joinIdCheck", method=RequestMethod.POST)
-	public ResponseEntity<String> joinIdCheck(String uid) {
+	@RequestMapping(value="joinUidCheck", method=RequestMethod.GET)
+	public ResponseEntity<String> joinUidCheck(String uid) {
 		ResponseEntity<String> entity = null;
 		
 		try {
 			if (userService.readByUid(uid) != null) {
-				entity = new ResponseEntity<>("ID_DUP", HttpStatus.OK);
+				entity = new ResponseEntity<>("UID_DUP", HttpStatus.OK);
 			} else {
 				entity = new ResponseEntity<>("SUCCESS", HttpStatus.OK);
 			}
@@ -170,8 +171,9 @@ public class UserController {
 		return entity;
 	}
 	
+	// ajax email 중복체크
 	@ResponseBody
-	@RequestMapping(value="joinEmailCheck", method=RequestMethod.POST)
+	@RequestMapping(value="joinEmailCheck", method=RequestMethod.GET)
 	public ResponseEntity<String> joinEmailCheck(String email) {
 		ResponseEntity<String> entity = null;
 		

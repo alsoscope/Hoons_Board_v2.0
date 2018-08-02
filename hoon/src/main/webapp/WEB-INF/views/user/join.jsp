@@ -94,12 +94,11 @@
 			var idMsg = $("#id-msg");
 			
 			$.ajax({
-				type:"POST",
-				url:"/user/joinIdCheck",
-				data:{uid:uid},
+				type:"GET",
+				url:"/user/joinUidCheck?uid=" + uid,
 				dataType:"text",
 				success:function(result) {
-					if (result == "ID_DUP") {
+					if (result == "UID_DUP") {
 						idMsg.text("이미 사용중인 아이디입니다.");
 						uidResult = false;
 					} else if (uid == "" || uid == null) {
@@ -150,9 +149,8 @@
 			var emailMsg = $("#email-msg");
 			
 			$.ajax({
-				type:"POST",
-				url:"/user/joinEmailCheck",
-				data:{email:email},
+				type:"GET",
+				url:"/user/joinEmailCheck?email=" + email,
 				dataType:"text",
 				success:function(result) {
 					if (result == "EMAIL_DUP") {
