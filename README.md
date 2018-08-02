@@ -119,7 +119,7 @@ alter table tbl_like add foreign key(uid) references tbl_user(uid);
 
 <b>< ERD ></b>
 
-<img src="https://user-images.githubusercontent.com/38021616/43562667-c9cc15ee-9658-11e8-96a1-b2db7d004f29.JPG" width="700px;">
+<img src="https://user-images.githubusercontent.com/38021616/43563196-e68a1fd4-965b-11e8-96e2-e7c5ffed62c3.JPG" width="700px;">
 
 <hr>
 
