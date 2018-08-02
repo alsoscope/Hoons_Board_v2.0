@@ -211,14 +211,10 @@ alter table tbl_like add foreign key(uid) references tbl_user(uid);
   <b><li>About</li></b>
   <ul>
     <ol>
-      <b><li>관리자에게 메일 보내기(emailJS 라이브러리 사용)</li></b>
+      <b><li>관리자에게 메일 보내기(emailJS)</li></b>
       <ul>
           <li>사용자의 편의를 위한 간단한 메세지 보내기</li>
       </ul>
     </ol>
   </ul
 </ol>
-
-
-
-  
