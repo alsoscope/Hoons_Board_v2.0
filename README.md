@@ -18,6 +18,9 @@
     <ul>
       <li>Bootstrap(HTML, CSS)</li>
       <li>JQuery(JavaScript)</li>
+      <li>Naver Open API(JavaScript)</li>
+      <li>emailJS(JavaScript)</li>
+      <li>Handlbars(JavaScript)</li>
       <li>Jackson(JSON)</li>
     </ul>
 </ul>
