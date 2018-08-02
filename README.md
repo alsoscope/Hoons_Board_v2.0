@@ -162,7 +162,7 @@ alter table tbl_like add foreign key(uid) references tbl_user(uid);
           <li>입력된 uid, pw 값을 파라미터로 하여 컨트롤러에 전달, 해당 사용자가 존재하는지 확인</li>
           <li>쿠키를 이용한 자동 로그인</li>
         </ul>
-      <b><li>네이버로 로그인 하기</li></b>
+      <b><li>네이버로 로그인 하기(네이버 오픈 API)</li></b>
       <ul>
        <li>네이버 사용자 정보를 가져옴 -> 로그인 유지(DB 반영 X)</li>
       </ul>
