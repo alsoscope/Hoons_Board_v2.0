@@ -181,6 +181,10 @@ alter table tbl_like add foreign key(uid) references tbl_user(uid);
         <ul>
           <li>사용자별 좋아요 관리(시각적으로 표현)</li>
         </ul>
+      <b><li>검색기능</li></b>
+        <ul>
+          <li>검색 조건 + 검색어 -> 조건 유지한 상태로 페이징 처리</li>
+        </ul>
       <b><li>파일 첨부</li></b>
       <ul>
         <li>이미지, 일반 파일을 구분하여 처리</li>
