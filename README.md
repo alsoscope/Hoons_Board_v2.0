@@ -95,11 +95,25 @@ CREATE TABLE tbl_user (
     PRIMARY KEY (uid)
 );
 
+
+<p><b> - tbl_like</b><p>
+  
+CREATE TABLE tbl_like (
+  lno int(11) NOT NULL AUTO_INCREMENT,
+  bno int(11) DEFAULT NULL,
+  uid varchar(50) DEFAULT NULL,
+  PRIMARY KEY (lno)
+)
+
 <p><b> - foreign key</b></p>
 
 alter table tbl_reply add foreign key(rno) references tbl_board(bno);
 
 alter table tbl_reply add foreign key(bno) references tbl_board(bno);
+
+alter table tbl_like add foreign key(bno) references tbl_board(bno);
+
+alter table tbl_like add foreign key(uid) references tbl_user(uid);
 
 <hr>
 
@@ -162,9 +176,10 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
             그 후 페이지 이동없이 게시글 정보(댓글 목록, 댓글수 등) 최신화
           </li>
           <li>Bootstrap Modal을 이용, 페이지 이동없이 댓글 관리 가능</li>
-          <ul>
-            <li>(좋아요 기능 구현중...)</li>
-          </ul>
+        </ul>
+      <b><li>좋아요</li></b>
+        <ul>
+          <li>사용자별 좋아요 관리(시각적으로 표현)</li>
         </ul>
       <b><li>파일 첨부</li></b>
       <ul>
