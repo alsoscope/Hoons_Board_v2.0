@@ -105,7 +105,7 @@ alter table tbl_reply add foreign key(bno) references tbl_board(bno);
 
 <b>< ERD ></b>
 
-<img src="https://user-images.githubusercontent.com/38021616/43076855-92dd2108-8ec0-11e8-9b31-50dcf337397a.JPG" width="700px;">
+<img src="https://user-images.githubusercontent.com/38021616/43562667-c9cc15ee-9658-11e8-96a1-b2db7d004f29.JPG" width="700px;">
 
 <hr>
 
