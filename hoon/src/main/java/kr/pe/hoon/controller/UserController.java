@@ -66,11 +66,6 @@ public class UserController {
 	
 	@RequestMapping(value="loginPostNaver", method=RequestMethod.POST)
 	public String loginPOSTNaver(@ModelAttribute("uVO") UserVO uVO) throws Exception {
-		if (uVO.getGender().equals("M")) {
-			uVO.setGender("남자");
-		} else if (uVO.getGender().equals("W")) {
-			uVO.setGender("여자");
-		}
 		
 		return "/user/loginPost";
 	}

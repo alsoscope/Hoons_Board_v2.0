@@ -343,10 +343,6 @@
 			$.ajax({
 				type:"GET",
 				url:"/boards/" + bno + "/replies?page=" + page,
-				headers:{
-					"Content-Type":"application/json",
-					"X-HTTP-Method-Override":"GET"
-				},
 				dataType:"json",
 				success:function(result) {
 					var replyList = result.replyList;
@@ -420,7 +416,6 @@
 					type:"DELETE",
 					url:"/boards/" + bno + "/replies/" + rno,
 					headers:{
-						"Content-Type":"application/json",
 						"X-HTTP-Method-Override":"DELETE"
 					},
 					dataType:"text",

@@ -23,7 +23,8 @@
 			
 			$("#uid").val(naver_id_login.getProfileData("id"));
 			$("#name").val(naver_id_login.getProfileData("name"));
-			$("#gender").val(naver_id_login.getProfileData("gender"));
+			var gender = naver_id_login.getProfileData("gender") == "M" ? "남자" : "여자";
+			$("#gender").val(gender);
 			$("#thumbnail").val(naver_id_login.getProfileData("profile_image"));
 			$("#email").val(naver_id_login.getProfileData("email"));
 			

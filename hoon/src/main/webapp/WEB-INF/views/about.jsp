@@ -81,8 +81,8 @@
 
 			var template_params = {
 				"name" : name,
-				"content" : email,
-				"email" : content
+				"content" : content,
+				"email" : email
 			}
 			var service_id = "default_service";
 			var template_id = "template_GZuK4SMV";
