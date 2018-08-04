@@ -54,8 +54,8 @@
 		<div class="col-lg-4"></div>
 	</div>
 	
+	<!-- 1. password 일치 확인 -->
 	<script>
-		// 1. password 체크버튼 활성화
 		var passwordCkBtn = $("#password-ck-btn");
 		var passwordCk = $("#password-ck");
 		
@@ -76,17 +76,21 @@
 			}
 		}
 		
+		// pw 입력창 keyup시
 		pwObj.keyup(function() {
 			pwCheck();
 			finalCheck();
 		});
 		
+		// pwck 입력창 keyup시
 		pwckObj.keyup(function() {
 			pwCheck();
 			finalCheck();
 		});
-		
-		// 2. 비동기적 uid 중복 체크
+	</script>	
+	
+	<!-- 2. ajax uid 중복 체크 -->
+	<script>	
 		var uidObj = $("#uid");
 		
 		function joinIdCheck() {
@@ -115,33 +119,14 @@
 			});
 		}
 		
+		// uid 입력창 keyup시
 		uidObj.keyup(function() {
 			joinIdCheck();
-			finalCheck();
 		});
+	</script>
 		
-		// 3. name null 체크
-		var nameObj = $("#name");
-		var nameMsg = $("#name-msg");
-		
-		function nameCheck() {
-			if (nameObj.val() == "" || nameObj.val() == null) {
-				nameMsg.text("이름은 필수항목입니다.");
-				nameResult = false;
-			} else {
-				nameMsg.text("");
-				nameResult = true;
-			}
-			
-			return nameResult;
-		}
-		
-		nameObj.keyup(function() {
-			nameCheck();
-			finalCheck();
-		});
-		
-		// 4. 비동기적 email 체크
+	<!-- 3. ajax email 중복 체크 -->
+	<script>
 		var emailObj = $("#email");
 		
 		function joinEmailCheck() {
@@ -170,13 +155,39 @@
 			});
 		}
 		
+		// email 입력창 keyup시
 		emailObj.keyup(function() {
 			joinEmailCheck();
+		});
+	</script>
+		
+		
+	<!-- 4. name null 체크 -->
+	<script>
+		var nameObj = $("#name");
+		var nameMsg = $("#name-msg");
+		
+		function nameCheck() {
+			if (nameObj.val() == "" || nameObj.val() == null) {
+				nameMsg.text("이름은 필수항목입니다.");
+				nameResult = false;
+			} else {
+				nameMsg.text("");
+				nameResult = true;
+			}
+			
+			return nameResult;
+		}
+		
+		// name 입력창 keyup시
+		nameObj.keyup(function() {
+			nameCheck();
 			finalCheck();
 		});
-		
-		
-		// 4가지 메소드 결과를 받아 "회원가입 버튼" 활성화 결정
+	</script>
+	
+	<!-- 1, 2, 3, 4 메소드 결과를 받아 "회원가입 버튼" 활성화 결정 -->
+	<script>	
 		var uidResult = false;
 		var pwResult = false;
 		var nameResult = false;
@@ -185,7 +196,7 @@
 		var submitBtn = $("#submit-btn");
 	
 		function finalCheck() {
-			if ((uidResult == true) && (pwResult == true) && (nameResult == true) && (emailResult == true)) {
+			if (uidResult && pwResult && nameResult && emailResult) {
 				submitBtn.removeAttr("disabled");
 			} else {
 				submitBtn.attr("disabled", "disabled");
