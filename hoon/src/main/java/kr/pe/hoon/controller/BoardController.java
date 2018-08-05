@@ -43,7 +43,7 @@ import kr.pe.hoon.util.UploadFileUtils;
 public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
-	private static final String uploadPath = "c:\\file\\upload";
+	private static final String uploadPath = "c:" + File.separator + "file" + File.separator + "upload";
 	
 	@Autowired
 	private BoardService boardService;
