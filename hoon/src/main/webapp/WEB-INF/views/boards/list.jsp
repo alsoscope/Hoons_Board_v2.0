@@ -115,12 +115,14 @@
 		</nav>
 	</div>
 	
+	<!-- 페이징 관련 부가 정보 -->
 	<form id="list-form">
 		<input type="hidden" name="page">
 		<input type="hidden" name="query">
 		<input type="hidden" name="sort">
 	</form>
 	
+	<!-- 페이징 부가정보 전송 -->
 	<script>
 		$(".pagination li a").click(function(event) {
 			event.preventDefault();
@@ -128,6 +130,7 @@
 			var page = $(this).attr("href");
 			var query = "${cri.query }";
 			var sort = "${cri.sort }";
+			
 			var listForm = $("#list-form");
 			
 			listForm.find("[name='page']").val(page);
@@ -136,7 +139,10 @@
 			listForm.attr("action", "/boards").attr("method", "GET");
 			listForm.submit();
 		});
-		
+	</script>
+	
+	<!-- 글 검색 기능 -->
+	<script>
 		$("#search-btn").click(function() {
 			var query = $("#query").val();
 			var sort = "${cri.sort }";
@@ -144,10 +150,12 @@
 			if (sort == null || sort == "") {
 				sort = "bno";
 			}
+			
 			location.href="/boards?sort=" + sort + "&query=" + query;
 		});
 	</script>
 	
+	<!-- 상단 메뉴바 활성화 여부 -->
 	<script>
 		var url = location.href;
 		var idxLikecnt = url.indexOf("sort=likecnt");

@@ -54,6 +54,7 @@
 		</div>
 	</div>
 	
+	<!-- 첨부파일 템플릿 -->
 	<script id="attach-template" type="text/x-handlebars-template">
 		<li>
 			<span class="mailbox-attachment-icon has-img">
@@ -68,16 +69,19 @@
 		</li>
 	</script>
 	
+	<!-- 첨부파일 업로드 -->
 	<script>
-		var source = $("#attach-template").html();
-		var template = Handlebars.compile(source);
-		
+		// 파일  드랍 관련 기본 이벤트 취소
 		$(".fileDrop").on("dragenter dragover", function(event) {
 			event.preventDefault();
 		});
 		
+		// 파일 드랍시 처리
 		$(".fileDrop").on("drop", function(event) {
 			event.preventDefault();
+			
+			var source = $("#attach-template").html();
+			var template = Handlebars.compile(source);
 			
 			var files = event.originalEvent.dataTransfer.files;
 			var file = files[0];
@@ -100,7 +104,32 @@
 				}
 			});
 		});
-		
+	</script>
+	
+	<!-- 첨부된 파일 삭제 -->
+	<script>	
+		$(".uploadedList").on("click", ".del-btn", function(event){
+			event.preventDefault();
+			
+			var that = $(this);
+			
+			$.ajax({
+				type:"POST",
+				url:"/boards/deleteFile",
+				data:{fileName:that.attr("href")},
+				dataType:"text",
+				success:function(result) {
+					console.log("RESULT: " + result);
+					if (result == "deleted") {
+						that.closest("li").remove();
+					}
+				}
+			});
+		});
+	</script>
+	
+	<!-- 글쓰기 -->
+	<script>
 		$("#create-form").submit(function(event) {
 			event.preventDefault();
 			
@@ -114,26 +143,5 @@
 			that.append(str);
 			that.get(0).submit();
 		});
-		
-		$(".uploadedList").on("click", ".del-btn" ,function(event){
-			event.preventDefault();
-			
-			var that = $(this);
-			var bno = "${bVO.bno}";
-			
-			$.ajax({
-				type:"POST",
-				url:"/boards/" + bno + "deleteFile",
-				data:{fileName:that.attr("href")},
-				dataType:"text",
-				success:function(result) {
-					console.log("RESULT: " + result);
-					if (result == "deleted") {
-						that.closest("li").remove();
-					}
-				}
-			});
-		});
 	</script>
-	
 <%@ include file="../include/footer.jsp" %>

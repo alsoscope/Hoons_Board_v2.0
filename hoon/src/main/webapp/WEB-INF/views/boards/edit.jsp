@@ -42,6 +42,7 @@
 		</div>
 	</div>
 	
+	<!--첨부파일 템플릿 -->
 	<script id="edit-attached-template" type="text/x-handlebars-template">
 		<li data-src="{{fullName}}">
 			<span class="mailbox-attachment-icon has-img">
@@ -56,9 +57,8 @@
 		</li>
 	</script>
 	
+	<!-- 첨부파일 업로드 -->
 	<script>
-		getAttachList();
-		
 		var source = $("#edit-attached-template").html();
 		var template = Handlebars.compile(source);
 		
@@ -92,6 +92,11 @@
 				}
 			});
 		});
+	</script>	
+	
+	<!-- 첨부파일 리스트 얻기 -->	
+	<script>	
+		getAttachList();
 		
 		function getAttachList() {
 			var bno = "${bVO.bno}";
@@ -112,7 +117,10 @@
 				}
 			});
 		}
+	</script>
 		
+	<!-- 첨부파일 변경사항 처리 -->
+	<script>
 		var deleteFiles = [];
 		
 		$(".uploadedList").on("click", ".del-btn" ,function(event){

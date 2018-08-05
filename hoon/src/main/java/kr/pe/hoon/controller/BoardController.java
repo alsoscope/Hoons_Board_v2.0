@@ -55,12 +55,14 @@ public class BoardController {
 	private LikeService likeService;
 	
 	// tbl_board 관련 --------------------------------------------------------------------------------------------------
+	// 글 쓰기 화면
 	@RequestMapping(value="new", method=RequestMethod.GET)
 	public String createGET() throws Exception {
 		
 		return "boards/new";
 	}
 	
+	// 글 쓰기
 	@RequestMapping(value="new", method=RequestMethod.POST)
 	public String createPOST(BoardVO bVO) throws Exception {
 		boardService.create(bVO);
@@ -68,6 +70,7 @@ public class BoardController {
 		return "redirect:/boards";
 	}
 	
+	// 글 조회
 	@RequestMapping(value="{bno}", method=RequestMethod.GET)
 	public String read(@PathVariable int bno, Model model) throws Exception {
 		logger.info(boardService.readNoViewcnt(bno).toString());
@@ -76,6 +79,7 @@ public class BoardController {
 		return "boards/info";
 	}
 	
+	// 전체 글 목록 화면
 	@RequestMapping("")
 	public String readAll(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		logger.info(boardService.readAll(cri).toString());
@@ -90,6 +94,7 @@ public class BoardController {
 		return "boards/list";
 	}
 	
+	// 글 수정 폼
 	@RequestMapping(value="{bno}/edit", method=RequestMethod.GET)
 	public String updateGET(@PathVariable int bno, Model model) throws Exception {
 		logger.info(boardService.readNoViewcnt(bno).toString());
@@ -98,6 +103,7 @@ public class BoardController {
 		return "boards/edit";
 	}
 	
+	// 글 수정
 	@RequestMapping(value="{bno}", method=RequestMethod.PUT)
 	public String updatePOST(@ModelAttribute BoardVO bVO) throws Exception {
 		boardService.update(bVO);
@@ -105,6 +111,7 @@ public class BoardController {
 		return "redirect:/boards/" + bVO.getBno();
 	}
 	
+	// 글 삭제
 	@RequestMapping(value="{bno}", method=RequestMethod.DELETE)
 	public String delete(int bno) throws Exception {
 		boardService.delete(bno);
@@ -113,6 +120,7 @@ public class BoardController {
 	}
 	
 	// tbl_reply 관련 --------------------------------------------------------------------------------------------------
+	// 댓글 목록
 	@ResponseBody
 	@RequestMapping(value="{bno}/replies", method=RequestMethod.GET)
 	public ResponseEntity<Map<String, Object>> readAllReplies(@PathVariable int bno, int page) {
@@ -142,6 +150,7 @@ public class BoardController {
 		return entity;
 	}
 	
+	// 댓글 쓰기
 	@ResponseBody
 	@RequestMapping(value="{bno}/replies/new", method=RequestMethod.POST)
 	public ResponseEntity<String> create(@PathVariable int bno, @RequestBody ReplyVO rVO) {
@@ -159,6 +168,7 @@ public class BoardController {
 		return entity;
 	}
 	
+	// 댓글 수정
 	@ResponseBody
 	@RequestMapping(value="{bno}/replies/{rno}", method=RequestMethod.PUT)
 	public ResponseEntity<String> update(@PathVariable int bno, @PathVariable int rno, @RequestBody ReplyVO rVO) {
@@ -177,6 +187,7 @@ public class BoardController {
 		return entity;
 	}
 	
+	// 댓글 삭제
 	@ResponseBody
 	@RequestMapping(value="{bno}/replies/{rno}", method=RequestMethod.DELETE)
 	public ResponseEntity<String> delete(@PathVariable int bno, @PathVariable int rno) {
@@ -194,6 +205,7 @@ public class BoardController {
 	}
 	
 	// rbl_attach 관련 --------------------------------------------------------------------------------------------------
+	// 첨부파일 목록
 	@ResponseBody
 	@RequestMapping("{bno}/attaches")
 	public List<String> readAllAttaches(@PathVariable int bno) throws Exception {
@@ -202,6 +214,7 @@ public class BoardController {
 		return boardService.readAllAttaches(bno);
 	}
 	
+	// 첨부파일 업로드(글 쓰기 폼)
 	@ResponseBody
 	@RequestMapping(value="new/uploadFile", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
 	public ResponseEntity<String> uploadFile(MultipartFile file) throws Exception {
@@ -210,6 +223,7 @@ public class BoardController {
 		return new ResponseEntity<>(UploadFileUtils.uploadFiles(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
 	}
 	
+	// 첨부파일 업로드(글 수정 폼)
 	@ResponseBody
 	@RequestMapping(value="{bno}/uploadFile", method=RequestMethod.POST, produces="text/plain;charset=utf-8")
 	public ResponseEntity<String> uploadFileForUpdate(MultipartFile file) throws Exception {
@@ -218,6 +232,7 @@ public class BoardController {
 		return new ResponseEntity<>(UploadFileUtils.uploadFiles(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
 	}
 	
+	// 첨부파일 디렉토리에 저장
 	@ResponseBody
 	@RequestMapping("{bno}/displayFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
@@ -252,8 +267,9 @@ public class BoardController {
 		return entity;
 	}
 	
+	// 첨부파일 삭제
 	@ResponseBody
-	@RequestMapping(value="{bno}/deleteFile", method=RequestMethod.POST)
+	@RequestMapping(value="/deleteFile", method=RequestMethod.POST)
 	public ResponseEntity<String> deleteFile(String fileName) {
 		logger.info("delete file: " + fileName);
 		String formatName = fileName.substring(fileName.indexOf(".") + 1);
@@ -271,6 +287,7 @@ public class BoardController {
 		return new ResponseEntity<>("deleted", HttpStatus.OK);
 	}
 	
+	// 모든 첨부파일 삭제
 	@ResponseBody
 	@RequestMapping(value="{bno}/deleteAllFiles", method=RequestMethod.POST)
 	public ResponseEntity<String> deleteAllFiles(@RequestParam("files[]") String[] files) {
@@ -298,6 +315,7 @@ public class BoardController {
 	}
 	
 	// tbl_like 관련 --------------------------------------------------------------------------------------------------
+	// 좋아요 토글
 	@ResponseBody
 	@RequestMapping(value="{bno}/{uid}/like", method=RequestMethod.GET)
 	public ResponseEntity<BoardVO> like(@PathVariable int bno, @PathVariable String uid) throws Exception {
@@ -314,6 +332,7 @@ public class BoardController {
 		return entity;
 	}
 	
+	// 좋아요 상태 확인
 	@ResponseBody
 	@RequestMapping(value="{bno}/{uid}", method=RequestMethod.GET)
 	public ResponseEntity<String> readLike(@PathVariable int bno, @PathVariable String uid) throws Exception {
