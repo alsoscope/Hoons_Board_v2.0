@@ -17,7 +17,7 @@
   <li>Used Open Source Library</li>
     <ul>
       <li>Bootstrap(HTML, CSS)</li>
-      <li>JQuery(JavaScript)</li>
+      <li>jQuery(JavaScript)</li>
       <li>Naver Open API(JavaScript)</li>
       <li>emailJS(JavaScript)</li>
       <li>Handlbars(JavaScript)</li>
@@ -34,7 +34,7 @@
     <li>Spring 3.9.5 STS</li>
     <li>Apache-Tomcat 9.0(WAS)</li>
     <li>Mysql(DB)</li>
-    <li>Github(SVN)</li>
+    <li>Github</li>
 </ul>
 
 <hr>
