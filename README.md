@@ -216,5 +216,12 @@ alter table tbl_like add foreign key(uid) references tbl_user(uid);
           <li>사용자의 편의를 위한 간단한 메세지 보내기</li>
       </ul>
     </ol>
-  </ul
+  </ul>
+  
+  <b><li>예외 처리</li></b>
+  <ul>
+    <ol>
+      <b><li>Java 클래스, 에러 코드별 예외 </li></b>
+    </ol>
+  </ul>
 </ol>
