@@ -218,10 +218,10 @@ alter table tbl_like add foreign key(uid) references tbl_user(uid);
     </ol>
   </ul>
   
-  <b><li>예외 처리</li></b>
+  <b><li>예외처리</li></b>
   <ul>
     <ol>
-      <b><li>Java 클래스, 에러 코드별 예외 </li></b>
+      <b><li>Java 클래스, 에러 코드별 예외처리</li></b>
     </ol>
   </ul>
 </ol>
